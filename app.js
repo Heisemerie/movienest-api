@@ -65,8 +65,22 @@ app.put("/api/genres/:id", (req, res) => {
   res.send(genre);
 });
 
+app.delete("/api/genres/:id", (req, res) => {
+  // Look up the genre
+  // If the genre does not exist, return 404 - Not found
+  const genre = genres.find((g) => g.id === parseInt(req.params.id));
+  if (!genre)
+    return res.status(404).send("The genre with the given ID was not found");
+
+  // Delete the genre
+  // Return the genre
+  const index = genres.indexOf(genre);
+  genres.splice(index, 1);
+  res.send(genre);
+});
+
 // Express "endpoint" event emitter
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000; // get port from environment variable or use port 3000
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
 });
