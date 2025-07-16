@@ -2,6 +2,7 @@ const express = require("express");
 const Joi = require("joi");
 
 const app = express();
+const schema = Joi.object({ name: Joi.string().min(3).required() });
 
 // Middleware
 app.use(express.json());
@@ -31,9 +32,23 @@ app.get("/api/genres/:id", (req, res) => {
   res.send(genre);
 });
 
+// Post genre
+app.post("/api/genres", (req, res) => {
+  // Validate request
+  // If invalid, return 404
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(404).send(error.details[0].message);
+
+  // Create genre and add to array
+  const genre = { id: genres.length + 1, name: req.body.name };
+  genres.push(genre);
+
+  // Return genre to client
+  res.send(genre);
+});
 
 // Express "endpoint" event emitter
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
-}); 
+});
