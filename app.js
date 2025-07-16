@@ -35,9 +35,9 @@ app.get("/api/genres/:id", (req, res) => {
 // Post genre
 app.post("/api/genres", (req, res) => {
   // Validate request
-  // If invalid, return 404
+  // If invalid, return 400
   const { error } = schema.validate(req.body);
-  if (error) return res.status(404).send(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);
 
   // Create genre and add to array
   const genre = { id: genres.length + 1, name: req.body.name };
