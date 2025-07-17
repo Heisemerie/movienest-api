@@ -1,11 +1,19 @@
 const express = require("express");
-const genres = require('./routes/genre')
+const genres = require("./routes/genre");
+const mongoose = require("mongoose");
 
 const app = express();
+
+// Connect to DB
+mongoose
+  .connect("mongodb://localhost/vidly")
+  .then(() => console.log("Connected to MongoDB..."))
+  .catch((err) => console.error("Could not connect to MongoDB..."));
 
 // Middleware
 app.use(express.json());
 
+// Routes
 app.use('/api/genres', genres)
 
 // Express "endpoint" event emitter
