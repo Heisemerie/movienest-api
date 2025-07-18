@@ -1,19 +1,7 @@
-const Joi = require("joi");
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
+const { schema, Genre } = require("../models/genre");
 
-const schema = Joi.object({ name: Joi.string().min(3).required() });
-
-// Initialize schema and create model
-const Genre = mongoose.model(
-  "Genre",
-  new mongoose.Schema({
-    name: { type: String, required: true, minLength: 5, maxLength: 50 },
-  })
-);
-
-// Routes
 // Get all genres in DB
 router.get("/", async (req, res) => {
   const genres = await Genre.find().sort({ name: 1 });
