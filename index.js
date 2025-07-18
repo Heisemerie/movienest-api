@@ -1,5 +1,6 @@
 const express = require("express");
 const genres = require("./routes/genre");
+const customers = require("./routes/customers");
 const mongoose = require("mongoose");
 
 const app = express();
@@ -14,7 +15,8 @@ mongoose
 app.use(express.json());
 
 // Routes
-app.use('/api/genres', genres)
+app.use("/api/genres", genres);
+app.use("/api/customers", customers);
 
 // Express "endpoint" event emitter
 const port = process.env.PORT || 3000; // get port from environment variable or use port 3000
