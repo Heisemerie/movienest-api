@@ -20,3 +20,4 @@ const Customer = mongoose.model("Customer", customerSchema);
 
 module.exports.Customer = Customer;
 module.exports.schema = schema;
+module.exports.customerSchema = customerSchema
