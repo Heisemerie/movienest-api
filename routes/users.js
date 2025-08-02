@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const express = require("express");
 const router = express.Router();
 const { schema, User } = require("../models/user");
@@ -11,14 +12,10 @@ router.post("/", async (req, res) => {
   const prevUser = await User.findOne({ email: req.body.email });
   if (prevUser) return res.status(400).send("This user already exists.");
 
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  });
+  const user = new User(_.pick(req.body, ["name", "email", "password"]));
   const result = await user.save();
 
-  res.send(result);
+  res.send(_.pick(result, ["_id", "name", "email"])); // do not return the password
 });
 
 module.exports = router;
