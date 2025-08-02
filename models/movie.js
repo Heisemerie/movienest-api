@@ -1,11 +1,12 @@
 const Joi = require("joi");
+Joi.objectId = require("joi-objectid")(Joi);
 const mongoose = require("mongoose");
 const { genreSchema } = require("../models/genre");
 
 // Joi movie schema
 const schema = Joi.object({
   title: Joi.string().min(3).required(),
-  genreId: Joi.string().required(), // genreId not genre (because we want the cutomer to send the ID of the genre ie API req)
+  genreId: Joi.objectId().required(), // genreId not genre (because we want the cutomer to send the ID of the genre ie API req)
   numberInStock: Joi.number().min(0).required(),
   dailyRentalRate: Joi.number().min(0).required(),
 });
