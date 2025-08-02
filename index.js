@@ -7,11 +7,13 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-// Connect to DB
+// Connect to MongoDB replica set
 mongoose
-  .connect("mongodb://localhost/vidly")
-  .then(() => console.log("Connected to MongoDB..."))
-  .catch((err) => console.error("Could not connect to MongoDB..."));
+  .connect(
+    "mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0"
+  )
+  .then(() => console.log("Connected to MongoDB replica set"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // Middleware
 app.use(express.json());
