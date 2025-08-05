@@ -11,6 +11,8 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "config": "^4.1.0",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "joi": "^17.13.3",
     "joi-objectid": "^4.0.2",

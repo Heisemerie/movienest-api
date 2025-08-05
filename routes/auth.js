@@ -1,3 +1,4 @@
+const config = require("config");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
@@ -11,7 +12,7 @@ const schema = Joi.object({
   password: Joi.string().min(5).max(255).required(),
 });
 
-// Post auth in DB
+// Post auth in DB (login)
 router.post("/", async (req, res) => {
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -25,7 +26,7 @@ router.post("/", async (req, res) => {
   if (!validPassword) return res.status(400).send("Invalid email or password");
 
   // Before we return a response we need to create a new JWT
-  const token = jwt.sign({ _id: user._id }, "jwtPrivateKey"); // pass payload & secret key
+  const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey")); // pass payload & secret key (from application settings)
   res.send(token);
 });
 

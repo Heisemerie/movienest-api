@@ -1,3 +1,5 @@
+require('dotenv').config(); // must come before `config` is used
+const config = require("config");
 const express = require("express");
 const genres = require("./routes/genres");
 const customers = require("./routes/customers");
@@ -8,6 +10,12 @@ const auth = require("./routes/auth");
 const mongoose = require("mongoose");
 
 const app = express();
+
+// Check that jwt is set
+if (!config.get("jwtPrivateKey")) {
+  console.error("FATAL ERROR: jwtPrivateKey is not defined"); // throw error
+  process.exit(1); // exit the process (0 is success)
+}
 
 // Connect to MongoDB replica set
 mongoose
