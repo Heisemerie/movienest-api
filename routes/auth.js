@@ -1,6 +1,6 @@
+const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
-const _ = require("lodash");
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models/user");
@@ -24,7 +24,9 @@ router.post("/", async (req, res) => {
   const validPassword = await bcrypt.compare(req.body.password, user.password); // compare plaintext and hashed password
   if (!validPassword) return res.status(400).send("Invalid email or password");
 
-  res.send(true); 
+  // Before we return a response we need to create a new JWT
+  const token = jwt.sign({ _id: user._id }, "jwtPrivateKey"); // pass payload & secret key
+  res.send(token);
 });
 
 module.exports = router;
