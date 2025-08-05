@@ -37,7 +37,7 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 
 // Express "endpoint" event emitter
-const port = process.env.PORT || 3000; // get port from environment variable or use port 3000
+const port = config.get("port"); // get port from config
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
 });

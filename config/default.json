@@ -1,3 +1,4 @@
 {
-    "jwtPrivateKey":""
+    "jwtPrivateKey":"",
+    "port": 3000
 }
