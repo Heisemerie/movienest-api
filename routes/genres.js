@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { schema, Genre } = require("../models/genre");
+const auth = require("../middleware/auth");
 
 // Get all genres in DB
 router.get("/", async (req, res) => {
@@ -20,7 +21,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Post genre
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   // Validate request
   // If invalid, return 400
   const { error } = schema.validate(req.body);
@@ -35,7 +36,7 @@ router.post("/", async (req, res) => {
 });
 
 // Update genre
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   // Validate
   // If invalid, return 400 - bad request
   const { error } = schema.validate(req.body);
@@ -56,7 +57,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete genre
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   // Look up and delete the genre
   // If the genre does not exist, return 404 - Not found
   const genre = await Genre.findByIdAndDelete(req.params.id);
