@@ -28,4 +28,6 @@ router.post("/", async (req, res) => {
   res.send(token);
 });
 
+// To log out a user, simply delete the token on the client (since it's not stored on the server)
+
 module.exports = router;
