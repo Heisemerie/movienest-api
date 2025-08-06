@@ -3,11 +3,12 @@ const _ = require("lodash");
 const express = require("express");
 const router = express.Router();
 const { schema, User } = require("../models/user");
+const auth = require("../middleware/auth");
 
-// Get All
-router.get("/", async (req, res) => {
-  const users = await User.find().sort({ name: 1 });
-  res.send(users);
+// Get user
+router.get("/me", auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  res.send(user);
 });
 
 // Post user in DB (create account)
