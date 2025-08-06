@@ -1,3 +1,5 @@
+const config = require("config");
+const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
@@ -30,6 +32,10 @@ const userSchema = new mongoose.Schema({
     maxLength: 1024, // hashed password max length
   },
 });
+
+userSchema.method("generateAuthToken", function () {
+  return jwt.sign({ _id: this._id }, config.get("jwtPrivateKey"));
+}); // Information Expert Principle (add token generation to user document)
 
 // Mongoose User model
 const User = mongoose.model("User", userSchema);
