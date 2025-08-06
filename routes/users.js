@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
   res.send(users);
 });
 
-// Post user in DB
+// Post user in DB (create account)
 router.post("/", async (req, res) => {
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
