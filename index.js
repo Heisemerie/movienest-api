@@ -1,4 +1,4 @@
-require('dotenv').config(); // must come before `config` is used
+require("dotenv").config(); // must come before `config` is used
 const config = require("config");
 const express = require("express");
 const genres = require("./routes/genres");
@@ -19,9 +19,7 @@ if (!config.get("jwtPrivateKey")) {
 
 // Connect to MongoDB replica set
 mongoose
-  .connect(
-    "mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0"
-  )
+  .connect(config.get("db.URI"))
   .then(() => console.log("Connected to MongoDB replica set"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
