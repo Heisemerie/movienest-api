@@ -1,3 +1,5 @@
+const config = require("config");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const express = require("express");
@@ -19,12 +21,17 @@ router.post("/", async (req, res) => {
   const prevUser = await User.findOne({ email: req.body.email });
   if (prevUser) return res.status(400).send("This user already exists.");
 
+  // Create new user
   let user = new User(_.pick(req.body, ["name", "email", "password"]));
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt); // hash the password
   const result = await user.save();
 
-  res.send(_.pick(result, ["_id", "name", "email"])); // do not return the password
+  const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey")); // user is immediately logged in after registering
+
+  res
+    .header("x-auth-token", token) // in our client app when we register a user we can read the header, store the jwt on the client (local storage) and send it in the requests to the server
+    .send(_.pick(result, ["_id", "name", "email"])); // do not return the password
 });
 
 module.exports = router;
