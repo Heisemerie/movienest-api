@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { schema, Genre } = require("../models/genre");
 const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 // Get all genres in DB
 router.get("/", async (req, res) => {
@@ -57,7 +58,7 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 // Delete genre
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", [auth, admin], async (req, res) => {
   // Look up and delete the genre
   // If the genre does not exist, return 404 - Not found
   const genre = await Genre.findByIdAndDelete(req.params.id);
