@@ -12,10 +12,10 @@ const schema = Joi.object({
 
 // Post auth in DB (login)
 router.post("/", async (req, res, next) => {
-  try {
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     // Validate email (check user exists)
     const user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(400).send("Invalid email or password");

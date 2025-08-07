@@ -31,12 +31,12 @@ router.get("/:id", async (req, res, next) => {
 
 // Post genre
 router.post("/", auth, async (req, res, next) => {
-  try {
-    // Validate request
-    // If invalid, return 400
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  // Validate request
+  // If invalid, return 400
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     // Create genre and add to DB
     const genre = new Genre({ name: req.body.name });
     const result = await genre.save();
@@ -50,12 +50,12 @@ router.post("/", auth, async (req, res, next) => {
 
 // Update genre
 router.put("/:id", auth, async (req, res, next) => {
-  try {
-    // Validate
-    // If invalid, return 400 - bad request
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  // Validate
+  // If invalid, return 400 - bad request
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     // Look up and update the genre in DB
     // If the genre does not exist, return 404 - Not found
     const genre = await Genre.findByIdAndUpdate(

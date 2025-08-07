@@ -11,7 +11,7 @@ router.get("/", async (req, res, next) => {
     const movies = await Movie.find().sort({ name: 1 });
     res.send(movies);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
@@ -24,16 +24,16 @@ router.get("/:id", async (req, res, next) => {
 
     res.send(movie);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
 // Post
 router.post("/", auth, async (req, res, next) => {
-  try {
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     // Fetch the genre by ID
     const genre = await Genre.findById(req.body.genreId);
     if (!genre) return res.status(400).send("Invalid genre.");
@@ -52,16 +52,16 @@ router.post("/", auth, async (req, res, next) => {
 
     res.send(result);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
 // Update
 router.put("/:id", auth, async (req, res, next) => {
-  try {
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     // Fetch the genre by ID
     const genre = await Genre.findById(req.body.genreId);
     if (!genre) return res.status(400).send("Invalid genre.");
@@ -78,7 +78,7 @@ router.put("/:id", auth, async (req, res, next) => {
 
     res.send(movie);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
@@ -91,7 +91,7 @@ router.delete("/:id", [auth, admin], async (req, res, next) => {
 
     res.send(movie);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 

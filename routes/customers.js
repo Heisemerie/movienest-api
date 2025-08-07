@@ -10,7 +10,7 @@ router.get("/", async (req, res, next) => {
     const customers = await Customer.find().sort({ name: 1 });
     res.send(customers);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
@@ -25,16 +25,16 @@ router.get("/:id", async (req, res, next) => {
 
     res.send(customer);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
 // Post
 router.post("/", auth, async (req, res, next) => {
-  try {
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     const customer = new Customer({
       name: req.body.name,
       isGold: req.body.isGold,
@@ -44,16 +44,16 @@ router.post("/", auth, async (req, res, next) => {
 
     res.send(result);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
 // Update
 router.put("/:id", auth, async (req, res, next) => {
-  try {
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     const customer = await Customer.findByIdAndUpdate(
       req.params.id,
       {
@@ -71,7 +71,7 @@ router.put("/:id", auth, async (req, res, next) => {
 
     res.send(customer);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
@@ -86,7 +86,7 @@ router.delete("/:id", [auth, admin], async (req, res, next) => {
 
     res.send(customer);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 

@@ -32,10 +32,10 @@ router.get("/:id", async (req, res, next) => {
 
 // Post
 router.post("/", auth, async (req, res, next) => {
-  try {
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     const session = await mongoose.startSession(); // Starts a session object (holds context for transaction).
 
     try {
@@ -84,10 +84,10 @@ router.post("/", auth, async (req, res, next) => {
 
 // Update
 router.put("/:id", auth, async (req, res, next) => {
-  try {
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     const session = await mongoose.startSession();
 
     try {

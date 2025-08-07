@@ -17,10 +17,10 @@ router.get("/me", auth, async (req, res, next) => {
 
 // Post user in DB (create account)
 router.post("/", async (req, res, next) => {
-  try {
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
+  try {
     // Check if user already exists
     const prevUser = await User.findOne({ email: req.body.email });
     if (prevUser) return res.status(400).send("This user already exists.");
