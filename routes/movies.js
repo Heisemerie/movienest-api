@@ -6,17 +6,17 @@ const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 
 // Get All
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const movies = await Movie.find().sort({ name: 1 });
     res.send(movies);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error)
   }
 });
 
 // Get
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const movie = Movie.findById(req.params.id);
     if (!movie)
@@ -24,12 +24,12 @@ router.get("/:id", async (req, res) => {
 
     res.send(movie);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error)
   }
 });
 
 // Post
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, async (req, res, next) => {
   try {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -52,12 +52,12 @@ router.post("/", auth, async (req, res) => {
 
     res.send(result);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error)
   }
 });
 
 // Update
-router.put("/:id", auth, async (req, res) => {
+router.put("/:id", auth, async (req, res, next) => {
   try {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -78,12 +78,12 @@ router.put("/:id", auth, async (req, res) => {
 
     res.send(movie);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error)
   }
 });
 
 // Delete
-router.delete("/:id", [auth, admin], async (req, res) => {
+router.delete("/:id", [auth, admin], async (req, res, next) => {
   try {
     const movie = Movie.findByIdAndDelete(req.params.id);
     if (!movie)
@@ -91,7 +91,7 @@ router.delete("/:id", [auth, admin], async (req, res) => {
 
     res.send(movie);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error)
   }
 });
 

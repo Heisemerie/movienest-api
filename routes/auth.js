@@ -11,7 +11,7 @@ const schema = Joi.object({
 });
 
 // Post auth in DB (login)
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
     const token = user.generateAuthToken();
     res.send(token);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error);
   }
 });
 

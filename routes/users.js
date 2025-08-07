@@ -6,17 +6,17 @@ const { schema, User } = require("../models/user");
 const auth = require("../middleware/auth");
 
 // Get user
-router.get("/me", auth, async (req, res) => {
+router.get("/me", auth, async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).select("-password");
     res.send(user);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error);
   }
 });
 
 // Post user in DB (create account)
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
       .header("x-auth-token", token) // in our client app when we register a user we can read the header, store the jwt on the client (local storage) and send it in the requests to the server
       .send(_.pick(result, ["_id", "name", "email"])); // do not return the password
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error);
   }
 });
 

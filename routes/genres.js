@@ -5,17 +5,17 @@ const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 
 // Get all genres in DB
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const genres = await Genre.find().sort({ name: 1 });
     res.send(genres);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error);
   }
 });
 
 // Get genre
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     // Find genre in array, if does not exist, return 404
     const genre = await Genre.findById(req.params.id);
@@ -25,12 +25,12 @@ router.get("/:id", async (req, res) => {
     // Return the genre
     res.send(genre);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error);
   }
 });
 
 // Post genre
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, async (req, res, next) => {
   try {
     // Validate request
     // If invalid, return 400
@@ -44,12 +44,12 @@ router.post("/", auth, async (req, res) => {
     // Return genre to client
     res.send(result);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error);
   }
 });
 
 // Update genre
-router.put("/:id", auth, async (req, res) => {
+router.put("/:id", auth, async (req, res, next) => {
   try {
     // Validate
     // If invalid, return 400 - bad request
@@ -69,12 +69,12 @@ router.put("/:id", auth, async (req, res) => {
     // Return the updated genre
     res.send(genre);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error);
   }
 });
 
 // Delete genre
-router.delete("/:id", [auth, admin], async (req, res) => {
+router.delete("/:id", [auth, admin], async (req, res, next) => {
   try {
     // Look up and delete the genre
     // If the genre does not exist, return 404 - Not found
@@ -85,7 +85,7 @@ router.delete("/:id", [auth, admin], async (req, res) => {
     // Return the genre
     res.send(genre);
   } catch (error) {
-    res.status(500).send("Something failed.");
+    next(error);
   }
 });
 
