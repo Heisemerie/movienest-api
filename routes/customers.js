@@ -3,20 +3,21 @@ const router = express.Router();
 const { schema, Customer } = require("../models/customer");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
+const asyncMiddleware = require("../middleware/async");
 
 // Get All
-router.get("/", async (req, res, next) => {
-  try {
+router.get(
+  "/",
+  asyncMiddleware(async (req, res) => {
     const customers = await Customer.find().sort({ name: 1 });
     res.send(customers);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Get
-router.get("/:id", async (req, res, next) => {
-  try {
+router.get(
+  "/:id",
+  asyncMiddleware(async (req, res) => {
     const customer = await Customer.findById(req.params.id);
     if (!customer)
       return res
@@ -24,17 +25,17 @@ router.get("/:id", async (req, res, next) => {
         .send("The customer with the given ID was not found");
 
     res.send(customer);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Post
-router.post("/", auth, async (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.post(
+  "/",
+  auth,
+  asyncMiddleware(async (req, res) => {
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  try {
     const customer = new Customer({
       name: req.body.name,
       isGold: req.body.isGold,
@@ -43,17 +44,17 @@ router.post("/", auth, async (req, res, next) => {
     const result = await customer.save();
 
     res.send(result);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Update
-router.put("/:id", auth, async (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.put(
+  "/:id",
+  auth,
+  asyncMiddleware(async (req, res) => {
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  try {
     const customer = await Customer.findByIdAndUpdate(
       req.params.id,
       {
@@ -70,14 +71,14 @@ router.put("/:id", auth, async (req, res, next) => {
         .send("The customer with the given ID was not found");
 
     res.send(customer);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Delete
-router.delete("/:id", [auth, admin], async (req, res, next) => {
-  try {
+router.delete(
+  "/:id",
+  [auth, admin],
+  asyncMiddleware(async (req, res) => {
     const customer = await Customer.findByIdAndDelete(req.params.id);
     if (!customer)
       return res
@@ -85,9 +86,7 @@ router.delete("/:id", [auth, admin], async (req, res, next) => {
         .send("The customer with the given ID was not found");
 
     res.send(customer);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 module.exports = router;

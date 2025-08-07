@@ -4,23 +4,25 @@ const express = require("express");
 const router = express.Router();
 const { schema, User } = require("../models/user");
 const auth = require("../middleware/auth");
+const asyncMiddleware = require("../middleware/async");
 
 // Get user
-router.get("/me", auth, async (req, res, next) => {
-  try {
+router.get(
+  "/me",
+  auth,
+  asyncMiddleware(async (req, res) => {
     const user = await User.findById(req.user._id).select("-password");
     res.send(user);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Post user in DB (create account)
-router.post("/", async (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.post(
+  "/",
+  asyncMiddleware(async (req, res) => {
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  try {
     // Check if user already exists
     const prevUser = await User.findOne({ email: req.body.email });
     if (prevUser) return res.status(400).send("This user already exists.");
@@ -35,9 +37,7 @@ router.post("/", async (req, res, next) => {
     res
       .header("x-auth-token", token) // in our client app when we register a user we can read the header, store the jwt on the client (local storage) and send it in the requests to the server
       .send(_.pick(result, ["_id", "name", "email"])); // do not return the password
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 module.exports = router;

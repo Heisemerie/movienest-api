@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models/user");
+const asyncMiddleware = require("../middleware/async");
 
 // Joi auth schema
 const schema = Joi.object({
@@ -11,11 +12,12 @@ const schema = Joi.object({
 });
 
 // Post auth in DB (login)
-router.post("/", async (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.post(
+  "/",
+  asyncMiddleware(async (req, res) => {
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  try {
     // Validate email (check user exists)
     const user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(400).send("Invalid email or password");
@@ -31,10 +33,8 @@ router.post("/", async (req, res, next) => {
     // Before we return a response we need to create a new JWT
     const token = user.generateAuthToken();
     res.send(token);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // To log out a user, simply delete the token on the client (since it's not stored on the server)
 

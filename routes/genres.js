@@ -3,20 +3,21 @@ const router = express.Router();
 const { schema, Genre } = require("../models/genre");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
+const asyncMiddleware = require("../middleware/async");
 
 // Get all genres in DB
-router.get("/", async (req, res, next) => {
-  try {
+router.get(
+  "/",
+  asyncMiddleware(async (req, res) => {
     const genres = await Genre.find().sort({ name: 1 });
     res.send(genres);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Get genre
-router.get("/:id", async (req, res, next) => {
-  try {
+router.get(
+  "/:id",
+  asyncMiddleware(async (req, res) => {
     // Find genre in array, if does not exist, return 404
     const genre = await Genre.findById(req.params.id);
     if (!genre)
@@ -24,38 +25,38 @@ router.get("/:id", async (req, res, next) => {
 
     // Return the genre
     res.send(genre);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Post genre
-router.post("/", auth, async (req, res, next) => {
-  // Validate request
-  // If invalid, return 400
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.post(
+  "/",
+  auth,
+  asyncMiddleware(async (req, res) => {
+    // Validate request
+    // If invalid, return 400
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  try {
     // Create genre and add to DB
     const genre = new Genre({ name: req.body.name });
     const result = await genre.save();
 
     // Return genre to client
     res.send(result);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Update genre
-router.put("/:id", auth, async (req, res, next) => {
-  // Validate
-  // If invalid, return 400 - bad request
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.put(
+  "/:id",
+  auth,
+  asyncMiddleware(async (req, res) => {
+    // Validate
+    // If invalid, return 400 - bad request
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  try {
     // Look up and update the genre in DB
     // If the genre does not exist, return 404 - Not found
     const genre = await Genre.findByIdAndUpdate(
@@ -68,14 +69,14 @@ router.put("/:id", auth, async (req, res, next) => {
 
     // Return the updated genre
     res.send(genre);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Delete genre
-router.delete("/:id", [auth, admin], async (req, res, next) => {
-  try {
+router.delete(
+  "/:id",
+  [auth, admin],
+  asyncMiddleware(async (req, res) => {
     // Look up and delete the genre
     // If the genre does not exist, return 404 - Not found
     const genre = await Genre.findByIdAndDelete(req.params.id);
@@ -84,9 +85,7 @@ router.delete("/:id", [auth, admin], async (req, res, next) => {
 
     // Return the genre
     res.send(genre);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 module.exports = router;

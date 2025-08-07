@@ -5,37 +5,38 @@ const { Movie } = require("../models/movie");
 const { default: mongoose } = require("mongoose");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
+const asyncMiddleware = require("../middleware/async");
 const router = express.Router();
 
 // Get all
-router.get("/", async (req, res, next) => {
-  try {
+router.get(
+  "/",
+  asyncMiddleware(async (req, res) => {
     const rentals = await Rental.find().sort("-dateOut");
     res.send(rentals);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Get
-router.get("/:id", async (req, res, next) => {
-  try {
+router.get(
+  "/:id",
+  asyncMiddleware(async (req, res) => {
     const rental = await Rental.findById(req.params.id);
     if (!rental)
       return res.status(404).send("The rental with the given ID was not found");
 
     res.send(rental);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Post
-router.post("/", auth, async (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.post(
+  "/",
+  auth,
+  asyncMiddleware(async (req, res) => {
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  try {
     const session = await mongoose.startSession(); // Starts a session object (holds context for transaction).
 
     try {
@@ -77,17 +78,17 @@ router.post("/", auth, async (req, res, next) => {
     } finally {
       await session.endSession();
     }
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Update
-router.put("/:id", auth, async (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.put(
+  "/:id",
+  auth,
+  asyncMiddleware(async (req, res) => {
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  try {
     const session = await mongoose.startSession();
 
     try {
@@ -143,22 +144,20 @@ router.put("/:id", auth, async (req, res, next) => {
     } finally {
       await session.endSession();
     }
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 // Delete
-router.delete("/:id", [auth, admin], async (req, res, next) => {
-  try {
+router.delete(
+  "/:id",
+  [auth, admin],
+  asyncMiddleware(async (req, res) => {
     const rental = await Rental.findByIdAndDelete(req.params.id);
     if (!rental)
       return res.status(404).send("The rental with the given ID was not found");
 
     res.send(rental);
-  } catch (error) {
-    next(error);
-  }
-});
+  })
+);
 
 module.exports = router;
