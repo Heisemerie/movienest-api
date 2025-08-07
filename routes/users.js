@@ -7,29 +7,37 @@ const auth = require("../middleware/auth");
 
 // Get user
 router.get("/me", auth, async (req, res) => {
-  const user = await User.findById(req.user._id).select("-password");
-  res.send(user);
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    res.send(user);
+  } catch (error) {
+    res.status(500).send("Something failed.");
+  }
 });
 
 // Post user in DB (create account)
 router.post("/", async (req, res) => {
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  try {
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  // Check if user already exists
-  const prevUser = await User.findOne({ email: req.body.email });
-  if (prevUser) return res.status(400).send("This user already exists.");
+    // Check if user already exists
+    const prevUser = await User.findOne({ email: req.body.email });
+    if (prevUser) return res.status(400).send("This user already exists.");
 
-  // Create new user
-  let user = new User(_.pick(req.body, ["name", "email", "password"]));
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt); // hash the password
-  const result = await user.save();
+    // Create new user
+    let user = new User(_.pick(req.body, ["name", "email", "password"]));
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt); // hash the password
+    const result = await user.save();
 
-  const token = user.generateAuthToken(); // user is immediately logged in after registering
-  res
-    .header("x-auth-token", token) // in our client app when we register a user we can read the header, store the jwt on the client (local storage) and send it in the requests to the server
-    .send(_.pick(result, ["_id", "name", "email"])); // do not return the password
+    const token = user.generateAuthToken(); // user is immediately logged in after registering
+    res
+      .header("x-auth-token", token) // in our client app when we register a user we can read the header, store the jwt on the client (local storage) and send it in the requests to the server
+      .send(_.pick(result, ["_id", "name", "email"])); // do not return the password
+  } catch (error) {
+    res.status(500).send("Something failed.");
+  }
 });
 
 module.exports = router;

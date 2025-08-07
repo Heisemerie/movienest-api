@@ -12,20 +12,28 @@ const schema = Joi.object({
 
 // Post auth in DB (login)
 router.post("/", async (req, res) => {
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  try {
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  // Validate email (check user exists)
-  const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send("Invalid email or password");
+    // Validate email (check user exists)
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(400).send("Invalid email or password");
 
-  // Validate password (compare passwords)
-  const validPassword = await bcrypt.compare(req.body.password, user.password); // compare plaintext and hashed password
-  if (!validPassword) return res.status(400).send("Invalid email or password");
+    // Validate password (compare passwords)
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    ); // compare plaintext and hashed password
+    if (!validPassword)
+      return res.status(400).send("Invalid email or password");
 
-  // Before we return a response we need to create a new JWT
-  const token = user.generateAuthToken();
-  res.send(token);
+    // Before we return a response we need to create a new JWT
+    const token = user.generateAuthToken();
+    res.send(token);
+  } catch (error) {
+    res.status(500).send("Something failed.");
+  }
 });
 
 // To log out a user, simply delete the token on the client (since it's not stored on the server)

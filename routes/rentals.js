@@ -9,17 +9,25 @@ const router = express.Router();
 
 // Get all
 router.get("/", async (req, res) => {
-  const rentals = await Rental.find().sort("-dateOut");
-  res.send(rentals);
+  try {
+    const rentals = await Rental.find().sort("-dateOut");
+    res.send(rentals);
+  } catch (error) {
+    res.status(500).send("Something failed.");
+  }
 });
 
 // Get
 router.get("/:id", async (req, res) => {
-  const rental = await Rental.findById(req.params.id);
-  if (!rental)
-    return res.status(404).send("The rental with the given ID was not found");
+  try {
+    const rental = await Rental.findById(req.params.id);
+    if (!rental)
+      return res.status(404).send("The rental with the given ID was not found");
 
-  res.send(rental);
+    res.send(rental);
+  } catch (error) {
+    res.status(500).send("Something failed.");
+  }
 });
 
 // Post
@@ -130,11 +138,15 @@ router.put("/:id", auth, async (req, res) => {
 
 // Delete
 router.delete("/:id", [auth, admin], async (req, res) => {
-  const rental = await Rental.findByIdAndDelete(req.params.id);
-  if (!rental)
-    return res.status(404).send("The rental with the given ID was not found");
+  try {
+    const rental = await Rental.findByIdAndDelete(req.params.id);
+    if (!rental)
+      return res.status(404).send("The rental with the given ID was not found");
 
-  res.send(rental);
+    res.send(rental);
+  } catch (error) {
+    res.status(500).send("Something failed.");
+  }
 });
 
 module.exports = router;
