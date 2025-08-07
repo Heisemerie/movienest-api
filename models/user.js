@@ -31,10 +31,14 @@ const userSchema = new mongoose.Schema({
     minLength: 5,
     maxLength: 1024, // hashed password max length
   },
+  isAdmin: Boolean,
 });
 
 userSchema.method("generateAuthToken", function () {
-  return jwt.sign({ _id: this._id }, config.get("jwtPrivateKey"));
+  return jwt.sign(
+    { _id: this._id, isAdmin: this.isAdmin },
+    config.get("jwtPrivateKey")
+  );
 }); // Information Expert Principle (add token generation to user document)
 
 // Mongoose User model
