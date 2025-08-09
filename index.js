@@ -1,5 +1,6 @@
 require("dotenv").config(); // must come before `config` is used
 const winston = require("winston"); // comes with console transport
+require("winston-mongodb");
 const config = require("config");
 const express = require("express");
 const genres = require("./routes/genres");
@@ -12,10 +13,11 @@ const mongoose = require("mongoose");
 const error = require("./middleware/error");
 
 const app = express();
+const uri = config.get("db.URI");
 
 // Add a file and console transport to the default logger
 winston.add(new winston.transports.File({ filename: "combined.log" }));
-winston.add(new winston.transports.Console());
+winston.add(new winston.transports.MongoDB({ db: uri }));
 
 // Check that jwt is set
 if (!config.get("jwtPrivateKey")) {
@@ -25,7 +27,7 @@ if (!config.get("jwtPrivateKey")) {
 
 // Connect to MongoDB replica set
 mongoose
-  .connect(config.get("db.URI"))
+  .connect(uri)
   .then(() => console.log("Connected to MongoDB replica set"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
