@@ -1,4 +1,5 @@
 require("dotenv").config(); // must come before `config` is used
+const winston = require("winston"); // comes with console transport
 const config = require("config");
 const express = require("express");
 const genres = require("./routes/genres");
@@ -11,6 +12,10 @@ const mongoose = require("mongoose");
 const error = require("./middleware/error");
 
 const app = express();
+
+// Add a file and console transport to the default logger
+winston.add(new winston.transports.File({ filename: "combined.log" }));
+winston.add(new winston.transports.Console());
 
 // Check that jwt is set
 if (!config.get("jwtPrivateKey")) {
