@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { schema, Movie } = require("../models/movie");
-const { Genre } = require("../models/genre");
+const { schema } = require("../models/movie");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const asyncMiddleware = require("../middleware/async");
+const movieService = require("../services/movie.service");
 
 // Get All
 router.get(
   "/",
   asyncMiddleware(async (req, res) => {
-    const movies = await Movie.find().sort({ name: 1 });
+    const movies = await movieService.getAll();
     res.send(movies);
   })
 );
@@ -19,7 +19,8 @@ router.get(
 router.get(
   "/:id",
   asyncMiddleware(async (req, res) => {
-    const movie = Movie.findById(req.params.id);
+    const movie = await movieService.getById(req.params.id);
+
     if (!movie)
       return res.status(404).send("The movie with the given ID was not found");
 
@@ -35,23 +36,11 @@ router.post(
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    // Fetch the genre by ID
-    const genre = await Genre.findById(req.body.genreId);
-    if (!genre) return res.status(400).send("Invalid genre.");
+    const { movie, genre } = await movieService.create(req.body);
 
-    const movie = new Movie({
-      title: req.body.title,
-      genre: {
-        _id: genre._id,
-        name: genre.name,
-      }, // embed genre document with specific properties (ie _id & name)
-      numberInStock: req.body.numberInStock,
-      dailyRentalRate: req.body.dailyRentalRate,
-    });
+    if (!genre) return res.status(400).send("Invalid genre");
 
-    const result = await movie.save();
-
-    res.send(result);
+    res.send(movie);
   })
 );
 
@@ -63,17 +52,9 @@ router.put(
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    // Fetch the genre by ID
-    const genre = await Genre.findById(req.body.genreId);
+    const { movie, genre } = await movieService.update(req.params.id, req.body);
+
     if (!genre) return res.status(400).send("Invalid genre.");
-
-    const movie = await Movie.findByIdAndUpdate(req.params.id, {
-      title: req.body.title,
-      genre: { _id: genre._id, name: genre.name }, // embed genre in movie
-      numberInStock: req.body.numberInStock,
-      dailyRentalRate: req.body.dailyRentalRate,
-    });
-
     if (!movie)
       return res.status(404).send("The movie with the given ID was not found");
 
@@ -86,7 +67,8 @@ router.delete(
   "/:id",
   [auth, admin],
   asyncMiddleware(async (req, res) => {
-    const movie = Movie.findByIdAndDelete(req.params.id);
+    const movie = await movieService.remove(req.params.id);
+
     if (!movie)
       return res.status(404).send("The movie with the given ID was not found");
 
