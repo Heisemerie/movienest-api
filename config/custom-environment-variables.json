@@ -1,3 +1,7 @@
 {
-    "jwtPrivateKey":"JWT_SECRET" 
+  "port": "PORT",
+  "db": {
+    "URI": "DB_URI"
+  },
+  "jwtPrivateKey": "JWT_SECRET"
 }

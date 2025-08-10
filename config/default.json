@@ -1,7 +1,7 @@
 {
-  "jwtPrivateKey": "",
-  "port": 3000,
+  "port": "",
   "db": {
-    "URI": "mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0"
-  }
+    "URI": ""
+  },
+  "jwtPrivateKey": ""
 }
