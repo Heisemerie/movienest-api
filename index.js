@@ -18,7 +18,14 @@ const uri = config.get("db.URI");
 process.on("uncaughtException", (err) => {
   console.log("WE GOT AN UNCAUGHT EXCEPTION");
   winston.error(err.message, err);
+  process.exit(1);
 }); // handles node.js process errors (outside express context)
+
+process.on("unhandledRejection", (err) => {
+  console.log("WE GOT AN UNHANDLED REJECTION");
+  winston.error(err.message, err);
+  process.exit(1);
+}); // handles node.js async process errors (outside express context)
 
 // Add a file and console transport to the default logger
 winston.add(new winston.transports.File({ filename: "combined.log" }));
