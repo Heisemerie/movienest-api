@@ -7,7 +7,7 @@ const auth = require("../routes/auth");
 const error = require("../middleware/error");
 const express = require("express");
 
-function routes(app) {
+module.exports = function (app) {
   // Middleware
   app.use(express.json());
 
@@ -19,6 +19,4 @@ function routes(app) {
   app.use("/api/users", users);
   app.use("/api/auth", auth);
   app.use(error); // register after all middleware functions (called by async.js, handles express and mongodb request processing errors)
-}
-
-module.exports = routes;
+};

@@ -1,7 +1,7 @@
 const winston = require("winston");
 require("winston-mongodb");
 
-function logging(uri) {
+module.exports = function (uri) {
   // Add a file and console transport to the default logger
   winston.add(new winston.transports.File({ filename: "combined.log" }));
   winston.add(new winston.transports.MongoDB({ db: uri }));
@@ -11,6 +11,4 @@ function logging(uri) {
   winston.rejections.handle(
     new winston.transports.File({ filename: "unhandledRejections.log" })
   );
-}
-
-module.exports = logging;
+};
