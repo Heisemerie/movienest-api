@@ -15,21 +15,15 @@ const error = require("./middleware/error");
 const app = express();
 const uri = config.get("db.URI");
 
-process.on("uncaughtException", (err) => {
-  console.log("WE GOT AN UNCAUGHT EXCEPTION");
-  winston.error(err.message, err);
-  process.exit(1);
-}); // handles node.js process errors (outside express context)
-
-process.on("unhandledRejection", (err) => {
-  console.log("WE GOT AN UNHANDLED REJECTION");
-  winston.error(err.message, err);
-  process.exit(1);
-}); // handles node.js async process errors (outside express context)
-
 // Add a file and console transport to the default logger
 winston.add(new winston.transports.File({ filename: "combined.log" }));
 winston.add(new winston.transports.MongoDB({ db: uri }));
+winston.exceptions.handle(
+  new winston.transports.File({ filename: "uncaughtExceptions.log" })
+);
+winston.rejections.handle(
+  new winston.transports.File({ filename: "unhandledRejections.log" })
+);
 
 // Check that jwt is set
 if (!config.get("jwtPrivateKey")) {
