@@ -3,6 +3,7 @@ require("winston-mongodb");
 
 module.exports = function (uri) {
   // Add a file and console transport to the default logger
+  winston.add( new winston.transports.Console())
   winston.add(new winston.transports.File({ filename: "combined.log" }));
   winston.add(new winston.transports.MongoDB({ db: uri }));
   winston.exceptions.handle(

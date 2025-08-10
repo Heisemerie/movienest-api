@@ -1,5 +1,6 @@
 require("dotenv").config(); // must come before `config` is used
 const config = require("config");
+const winston = require("winston");
 const express = require("express");
 const app = express();
 
@@ -14,5 +15,5 @@ require("./startup/configs")(jwtPrivateKey);
 
 // Express "endpoint" event emitter
 app.listen(port, () => {
-  console.log(`Listening on port ${port}...`);
+  winston.info(`Listening on port ${port}...`);
 });
