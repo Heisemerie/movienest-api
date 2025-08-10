@@ -15,6 +15,11 @@ const error = require("./middleware/error");
 const app = express();
 const uri = config.get("db.URI");
 
+process.on("uncaughtException", (err) => {
+  console.log("WE GOT AN UNCAUGHT EXCEPTION");
+  winston.error(err.message, err);
+}); // handles node.js process errors (outside express context)
+
 // Add a file and console transport to the default logger
 winston.add(new winston.transports.File({ filename: "combined.log" }));
 winston.add(new winston.transports.MongoDB({ db: uri }));
@@ -41,7 +46,7 @@ app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
-app.use(error); // register after all middleware functions (called by )
+app.use(error); // register after all middleware functions (called by async.js, handles express and mongodb request processing errors)
 
 // Express "endpoint" event emitter
 const port = config.get("port"); // get port from config
