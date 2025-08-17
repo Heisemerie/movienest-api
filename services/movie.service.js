@@ -1,9 +1,8 @@
-const { movieRepo, genreRepo } = require("../repo/repo");
-
-const movieRepo = new Repo(Movie);
+const movieRepo = require("../repo/MovieRepo");
+const genreRepo = require("../repo/GenreRepo");
 
 async function getAll() {
-  return movieRepo.findAllSortByName();
+  return movieRepo.findAllSortedByTitle();
 }
 
 async function getById(id) {
