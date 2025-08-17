@@ -1,8 +1,9 @@
-const movieRepo = require("../repo/movie.repo");
-const { Genre } = require("../models/genre");
+const { movieRepo, genreRepo } = require("../repo/repo");
+
+const movieRepo = new Repo(Movie);
 
 async function getAll() {
-  return movieRepo.findAll();
+  return movieRepo.findAllSortByName();
 }
 
 async function getById(id) {
@@ -12,7 +13,7 @@ async function getById(id) {
 
 async function create(data) {
   // Fetch the genre by ID
-  const genre = await Genre.findById(data.genreId);
+  const genre = await genreRepo.findById(data.genreId);
   if (!genre) return { genre };
 
   const movieData = {
