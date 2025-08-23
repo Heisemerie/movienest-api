@@ -1,5 +1,5 @@
 const { Customer } = require("../models/customer");
-const Repo = require("./Repo");
+const Repo = require("./DbRepo");
 
 class CustomerRepo extends Repo {
   constructor(model) {

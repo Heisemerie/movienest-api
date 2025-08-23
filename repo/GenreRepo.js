@@ -1,5 +1,5 @@
 const { Genre } = require("../models/genre");
-const Repo = require("./Repo");
+const Repo = require("./DbRepo");
 
 class GenreRepo extends Repo {
   constructor(model) {

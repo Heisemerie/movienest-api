@@ -1,5 +1,5 @@
 const { Rental } = require("../models/rental");
-const Repo = require("./Repo");
+const Repo = require("./DbRepo");
 
 class RentalRepo extends Repo {
   constructor(model) {
