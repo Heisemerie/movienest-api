@@ -1,5 +1,5 @@
 const { Movie } = require("../models/movie");
-const { Repo } = require("./repo");
+const Repo = require("./Repo");
 
 class MovieRepo extends Repo {
   constructor(model) {

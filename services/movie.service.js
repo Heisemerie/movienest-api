@@ -2,7 +2,7 @@ const movieRepo = require("../repo/MovieRepo");
 const genreRepo = require("../repo/GenreRepo");
 
 async function getAll() {
-  return movieRepo.findAllSortedByTitle();
+  return await movieRepo.findAllSortedByTitle();
 }
 
 async function getById(id) {

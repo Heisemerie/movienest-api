@@ -29,4 +29,4 @@ class Repo {
   };
 }
 
-module.exports = { Repo };
+module.exports = Repo;

@@ -1,5 +1,5 @@
 const { User } = require("../models/user");
-const {Repo} = require('./repo')
+const Repo = require("./Repo");
 
 class UserRepo extends Repo {
   constructor(model) {
@@ -11,4 +11,4 @@ class UserRepo extends Repo {
   };
 }
 
-const userRepo = new Repo(User);
+module.exports = new Repo(User);
