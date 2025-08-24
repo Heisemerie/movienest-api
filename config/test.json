@@ -1,0 +1,7 @@
+{
+  "port": "",
+  "db": {
+    "URI": ""
+  },
+  "jwtPrivateKey": "1234"
+}
