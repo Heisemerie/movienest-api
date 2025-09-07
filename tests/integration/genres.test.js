@@ -1,6 +1,6 @@
 const request = require("supertest");
 const { Genre } = require("../../models/genre");
-const mongoose = require("mongoose");
+const { User } = require("../../models/user");
 
 let server;
 
@@ -47,6 +47,44 @@ describe("/api/genres", () => {
       const res = await request(server).get("/api/genres/1");
 
       expect(res.status).toBe(404);
+    });
+  });
+
+  describe("POST /", () => {
+    // assume user is not logged in
+    it("should return 401 if client is not logged in", async () => {
+      const res = await request(server)
+        .post("/api/genres")
+        .send({ name: "genre1" });
+
+      expect(res.status).toBe(401);
+    });
+
+    // assume user is logged in but sends invalid genre
+    it("should return 400 if genre is less than 5 characters", async () => {
+      // First login (generate auth token)
+      const token = new User().generateAuthToken();
+
+      const res = await request(server)
+        .post("/api/genres")
+        .set("x-auth-token", token)
+        .send({ name: "1234" });
+
+      expect(res.status).toBe(400);
+    });
+
+    it("should return 400 if genre is more than 50 characters", async () => {
+      // First login (generate auth token)
+      const token = new User().generateAuthToken();
+
+      const name = new Array(52).join("a"); // generate a string of 51 characters
+
+      const res = await request(server)
+        .post("/api/genres")
+        .set("x-auth-token", token)
+        .send({ name: name });
+
+      expect(res.status).toBe(400);
     });
   });
 });
