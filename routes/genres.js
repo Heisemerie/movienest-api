@@ -4,6 +4,7 @@ const { schema, Genre } = require("../models/genre");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const asyncMiddleware = require("../middleware/async");
+const validateObjectId = require("../middleware/validateObjectId");
 
 // Get all genres in DB
 router.get(
@@ -17,6 +18,7 @@ router.get(
 // Get genre
 router.get(
   "/:id",
+  validateObjectId,
   asyncMiddleware(async (req, res) => {
     // Find genre in array, if does not exist, return 404
     const genre = await Genre.findById(req.params.id);
