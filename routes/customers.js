@@ -4,6 +4,7 @@ const { schema, Customer } = require("../models/customer");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const asyncMiddleware = require("../middleware/async");
+const validateObjectId = require("../middleware/validateObjectId");
 
 // Get All
 router.get(
@@ -17,6 +18,7 @@ router.get(
 // Get
 router.get(
   "/:id",
+  validateObjectId,
   asyncMiddleware(async (req, res) => {
     const customer = await Customer.findById(req.params.id);
     if (!customer)
@@ -50,7 +52,7 @@ router.post(
 // Update
 router.put(
   "/:id",
-  auth,
+  [auth, validateObjectId],
   asyncMiddleware(async (req, res) => {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -77,7 +79,7 @@ router.put(
 // Delete
 router.delete(
   "/:id",
-  [auth, admin],
+  [auth, admin, validateObjectId],
   asyncMiddleware(async (req, res) => {
     const customer = await Customer.findByIdAndDelete(req.params.id);
     if (!customer)

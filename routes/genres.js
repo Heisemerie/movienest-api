@@ -52,7 +52,7 @@ router.post(
 // Update genre
 router.put(
   "/:id",
-  auth,
+  [auth, validateObjectId],
   asyncMiddleware(async (req, res) => {
     // Validate
     // If invalid, return 400 - bad request
@@ -77,7 +77,7 @@ router.put(
 // Delete genre
 router.delete(
   "/:id",
-  [auth, admin],
+  [auth, admin, validateObjectId],
   asyncMiddleware(async (req, res) => {
     // Look up and delete the genre
     // If the genre does not exist, return 404 - Not found

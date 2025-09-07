@@ -6,6 +6,7 @@ const { default: mongoose } = require("mongoose");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const asyncMiddleware = require("../middleware/async");
+const validateObjectId = require("../middleware/validateObjectId");
 const router = express.Router();
 
 // Get all
@@ -20,6 +21,7 @@ router.get(
 // Get
 router.get(
   "/:id",
+  validateObjectId,
   asyncMiddleware(async (req, res) => {
     const rental = await Rental.findById(req.params.id);
     if (!rental)
@@ -84,7 +86,7 @@ router.post(
 // Update
 router.put(
   "/:id",
-  auth,
+  [auth, validateObjectId],
   asyncMiddleware(async (req, res) => {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -150,7 +152,7 @@ router.put(
 // Delete
 router.delete(
   "/:id",
-  [auth, admin],
+  [auth, admin, validateObjectId],
   asyncMiddleware(async (req, res) => {
     const rental = await Rental.findByIdAndDelete(req.params.id);
     if (!rental)
