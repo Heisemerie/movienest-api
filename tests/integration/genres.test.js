@@ -51,6 +51,7 @@ describe("/api/genres", () => {
   });
 
   describe("POST /", () => {
+    // Testing the failure paths (Authorization & Invalid inputs)
     // assume user is not logged in
     it("should return 401 if client is not logged in", async () => {
       const res = await request(server)
@@ -85,6 +86,34 @@ describe("/api/genres", () => {
         .send({ name: name });
 
       expect(res.status).toBe(400);
+    });
+
+    // Testing the Happy Paths (Save to DB and API Response)
+    it("should save the genre if it is valid", async () => {
+      // First login (generate auth token)
+      const token = new User().generateAuthToken();
+
+      const res = await request(server)
+        .post("/api/genres")
+        .set("x-auth-token", token)
+        .send({ name: "genre1" }); // send the genre
+
+      const genre = Genre.find({ name: "genre1" }); // directly query the database for the genre sent
+
+      expect(genre).not.toBeNull();
+    });
+
+    it("should return the genre if it is valid", async () => {
+      // First login (generate auth token)
+      const token = new User().generateAuthToken();
+
+      const res = await request(server)
+        .post("/api/genres")
+        .set("x-auth-token", token)
+        .send({ name: "genre1" }); // send the genre
+
+      expect(res.body).toHaveProperty("_id");
+      expect(res.body).toHaveProperty("name", "genre1");
     });
   });
 });
