@@ -14,6 +14,9 @@ require("./startup/routes")(app);
 require("./startup/configs")(jwtPrivateKey);
 
 // Express "endpoint" event emitter
-app.listen(port, () => {
+const server = app.listen(port, () => {
   winston.info(`Listening on port ${port}...`);
 });
+
+// Export server for Integration Test
+module.exports = server;
