@@ -10,17 +10,14 @@ describe("/api/genres", () => {
     server = require("../../index");
   });
   afterEach(async () => {
-    server.close();
     await Genre.deleteMany({}); // cleanup after modifying the state to make test repeatable
+    await server.close();
   });
 
   describe("GET", () => {
     it("should return all genres", async () => {
       // Populate the Test DB
-      await Genre.collection.insertMany([
-        { name: "genre1" },
-        { name: "genre2" },
-      ]);
+      await Genre.insertMany([{ name: "genre1" }, { name: "genre2" }]);
 
       const res = await request(server).get("/api/genres");
 
@@ -99,7 +96,7 @@ describe("/api/genres", () => {
     it("should save the genre if it is valid", async () => {
       await exec();
 
-      const genre = Genre.find({ name: "genre1" }); // directly query the database for the genre sent
+      const genre = await Genre.findOne({ name: "genre1" }); // directly query the database for the genre sent
 
       expect(genre).not.toBeNull();
     });

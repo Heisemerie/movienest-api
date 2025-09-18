@@ -7,8 +7,8 @@ describe("auth middleware", () => {
     server = require("../../index");
   });
   afterEach(async () => {
-    server.close();
     await Genre.deleteMany({});
+    await server.close();
   });
 
   let token;
@@ -21,7 +21,7 @@ describe("auth middleware", () => {
   };
 
   beforeEach(() => {
-    token = new User.generateAuthToken();
+    token = new User().generateAuthToken();
   });
 
   it("should return 401 if no token is provided", async () => {
