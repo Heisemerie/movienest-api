@@ -128,4 +128,73 @@ describe("/api/genres", () => {
       expect(res.body).toHaveProperty("name", "genre1");
     });
   });
+
+  describe("PUT /:id", () => {
+    let token;
+    let name;
+    let id;
+
+    const exec = async () => {
+      return await request(server)
+        .put(`/api/genres/${id}`)
+        .set("x-auth-token", token)
+        .send({ name });
+    };
+
+    beforeEach(async () => {
+      token = new User().generateAuthToken();
+      name = "genre1";
+      const genre = new Genre({ name });
+      await genre.save();
+      id = genre._id;
+    });
+
+    it("should return 401 if client is not logged in", async () => {
+      token = "";
+
+      const res = await exec();
+
+      expect(res.status).toBe(401);
+    });
+
+    it("should return 404 if invalid id is passed", async () => {
+      id = 1;
+
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+    });
+
+    it("should return 400 if genre is less than 5 characters", async () => {
+      name = "1234";
+
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+    });
+
+    it("should return 400 if genre is more than 50 characters", async () => {
+      name = new Array(52).join("a");
+
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+    });
+
+    it("should return  404 if no genre with the given ID exists", async () => {
+      id = new mongoose.Types.ObjectId();
+
+      const res = await exec();
+
+      expect(res.status).toBe(404);
+    });
+
+    it("should return the genre if it is valid", async () => {
+      const res = await exec();
+
+      expect(res.status).toBe(200);
+      expect(res.body).toMatchObject({ name: "genre1" });
+      expect(res.body).toHaveProperty("name", "genre1");
+    });
+  });
 });
