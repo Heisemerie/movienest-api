@@ -1,10 +1,10 @@
 const request = require("supertest");
-const { User } = require("../../models/user");
-const { Genre } = require("../../models/genre");
+const { User } = require("../../../models/user");
+const { Genre } = require("../../../models/genre");
 
 describe("auth middleware", () => {
   beforeEach(() => {
-    server = require("../../index");
+    server = require("../../../index");
   });
   afterEach(async () => {
     await Genre.deleteMany({});

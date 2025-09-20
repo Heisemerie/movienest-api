@@ -1,6 +1,6 @@
 const request = require("supertest");
-const { Genre } = require("../../models/genre");
-const { User } = require("../../models/user");
+const { Genre } = require("../../../models/genre");
+const { User } = require("../../../models/user");
 const { default: mongoose } = require("mongoose");
 
 let server;
@@ -8,7 +8,7 @@ let server;
 describe("/api/genres", () => {
   // Initialize and close the server after testing to prevent creating multiple servers clashing on the same port
   beforeEach(() => {
-    server = require("../../index");
+    server = require("../../../index");
   });
   afterEach(async () => {
     await Genre.deleteMany({}); // cleanup after modifying the state to make test repeatable
