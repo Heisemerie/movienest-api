@@ -30,11 +30,20 @@ describe("/api/genres", () => {
   });
 
   describe("GET /:id", () => {
-    it("should return genre if valid id is passed", async () => {
+    let id;
+
+    const exec = async () => {
+      return await request(server).get(`/api/genres/${id}`);
+    };
+
+    beforeEach(async () => {
       const genre = new Genre({ name: "genre1" });
       await genre.save();
+      id = genre._id;
+    });
 
-      const res = await request(server).get(`/api/genres/${genre._id}`);
+    it("should return genre if valid id is passed", async () => {
+      const res = await exec();
 
       expect(res.status).toBe(200); // too generic
       expect(res.body).toMatchObject({ name: "genre1" });
@@ -42,14 +51,17 @@ describe("/api/genres", () => {
     });
 
     it("should return 404 if invalid id is passed", async () => {
-      const res = await request(server).get("/api/genres/1");
+      id = 1;
+
+      const res = await exec();
 
       expect(res.status).toBe(404);
     });
 
     it("should return 404 if no genre with the given ID exists", async () => {
-      const id = new mongoose.Types.ObjectId();
-      const res = await request(server).get(`/api/genres/${id}`);
+      id = new mongoose.Types.ObjectId();
+
+      const res = await exec();
 
       expect(res.status).toBe(404);
     });
