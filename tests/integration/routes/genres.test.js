@@ -138,7 +138,7 @@ describe("/api/genres", () => {
       return await request(server)
         .put(`/api/genres/${id}`)
         .set("x-auth-token", token)
-        .send({ name });
+        .send({ name: "genre2" });
     };
 
     beforeEach(async () => {
@@ -193,8 +193,8 @@ describe("/api/genres", () => {
       const res = await exec();
 
       expect(res.status).toBe(200);
-      expect(res.body).toMatchObject({ name: "genre1" });
-      expect(res.body).toHaveProperty("name", "genre1");
-    });
+      expect(res.body).toMatchObject({ name: "genre2" });
+      expect(res.body).toHaveProperty("name", "genre2");
+    }); 
   });
 });
