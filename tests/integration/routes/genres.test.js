@@ -138,7 +138,7 @@ describe("/api/genres", () => {
       return await request(server)
         .put(`/api/genres/${id}`)
         .set("x-auth-token", token)
-        .send({ name: "genre2" });
+        .send({ name });
     };
 
     beforeEach(async () => {
@@ -147,6 +147,7 @@ describe("/api/genres", () => {
       const genre = new Genre({ name });
       await genre.save();
       id = genre._id;
+      name = "genre2";
     });
 
     it("should return 401 if client is not logged in", async () => {
@@ -195,6 +196,6 @@ describe("/api/genres", () => {
       expect(res.status).toBe(200);
       expect(res.body).toMatchObject({ name: "genre2" });
       expect(res.body).toHaveProperty("name", "genre2");
-    }); 
+    });
   });
 });
