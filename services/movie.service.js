@@ -1,18 +1,18 @@
-const movieRepo = require("../repo/MovieRepo");
-const genreRepo = require("../repo/GenreRepo");
+const MovieRepo = require("../repo/MovieRepo");
+const GenreRepo = require("../repo/GenreRepo");
 
 async function getAll() {
-  return await movieRepo.findAllSortedByTitle();
+  return await MovieRepo.findAllSortedByTitle();
 }
 
 async function getById(id) {
-  const movie = await movieRepo.findById(id);
+  const movie = await MovieRepo.findById(id);
   return movie;
 }
 
 async function create(data) {
   // Fetch the genre by ID
-  const genre = await genreRepo.findById(data.genreId);
+  const genre = await GenreRepo.findById(data.genreId);
   if (!genre) return { genre };
 
   const movieData = {
@@ -22,14 +22,14 @@ async function create(data) {
     dailyRentalRate: data.dailyRentalRate,
   };
 
-  const movie = await movieRepo.create(movieData);
+  const movie = await MovieRepo.create(movieData);
 
   return { movie, genre };
 }
 
 async function update(id, data) {
   // Fetch the genre by ID
-  const genre = await Genre.findById(data.genreId);
+  const genre = await GenreRepo.findById(data.genreId);
   if (!genre) return { genre };
 
   const movieData = {
@@ -39,14 +39,14 @@ async function update(id, data) {
     dailyRentalRate: data.dailyRentalRate,
   };
 
-  const movie = await movieRepo.update(id, movieData);
+  const movie = await MovieRepo.update(id, movieData);
   if (!movie) return { movie, genre };
 
   return { movie, genre };
 }
 
 async function remove(id) {
-  const movie = await movieRepo.delete(id);
+  const movie = await MovieRepo.delete(id);
   return movie;
 }
 
