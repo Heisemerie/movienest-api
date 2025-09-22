@@ -1,9 +1,8 @@
 const Joi = require("joi");
-const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
-const { User } = require("../models/user");
 const asyncMiddleware = require("../middleware/async");
+const loginService = require("../services/login.service");
 
 // Joi auth schema
 const schema = Joi.object({
@@ -18,24 +17,16 @@ router.post(
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    // Validate email (check user exists)
-    const user = await User.findOne({ email: req.body.email });
+    const { user, validPassword, token } = loginService.create(req.body);
+
     if (!user) return res.status(400).send("Invalid email or password");
 
-    // Validate password (compare passwords)
-    const validPassword = await bcrypt.compare(
-      req.body.password,
-      user.password
-    ); // compare plaintext and hashed password
     if (!validPassword)
       return res.status(400).send("Invalid email or password");
 
-    // Before we return a response we need to create a new JWT
-    const token = user.generateAuthToken();
     res.send(token);
   })
 );
-
 // To log out a user, simply delete the token on the client (since it's not stored on the server)
 
 module.exports = router;
