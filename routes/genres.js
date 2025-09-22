@@ -1,16 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { schema, Genre } = require("../models/genre");
+const { schema } = require("../models/genre");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const asyncMiddleware = require("../middleware/async");
 const validateObjectId = require("../middleware/validateObjectId");
+const genreService = require("../services/genre.service");
 
 // Get all genres in DB
 router.get(
-  "/",
+  "/", 
   asyncMiddleware(async (req, res) => {
-    const genres = await Genre.find().sort({ name: 1 });
+    const genres = await genreService.getAll();
+
     res.send(genres);
   })
 );
@@ -20,12 +22,10 @@ router.get(
   "/:id",
   validateObjectId,
   asyncMiddleware(async (req, res) => {
-    // Find genre in array, if does not exist, return 404
-    const genre = await Genre.findById(req.params.id);
+    const genre = await genreService.getById(req.params.id);
     if (!genre)
       return res.status(404).send("The genre with the given ID was not found.");
 
-    // Return the genre
     res.send(genre);
   })
 );
@@ -35,17 +35,12 @@ router.post(
   "/",
   auth,
   asyncMiddleware(async (req, res) => {
-    // Validate request
-    // If invalid, return 400
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    // Create genre and add to DB
-    const genre = new Genre({ name: req.body.name });
-    const result = await genre.save();
+    const genre = await genreService.create(req.body);
 
-    // Return genre to client
-    res.send(result);
+    res.send(genre);
   })
 );
 
@@ -54,22 +49,13 @@ router.put(
   "/:id",
   [auth, validateObjectId],
   asyncMiddleware(async (req, res) => {
-    // Validate
-    // If invalid, return 400 - bad request
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    // Look up and update the genre in DB
-    // If the genre does not exist, return 404 - Not found
-    const genre = await Genre.findByIdAndUpdate(
-      req.params.id,
-      { name: req.body.name },
-      { new: true }
-    );
+    const genre = await genreService.update(req.params.id, req.body);
     if (!genre)
       return res.status(404).send("The genre with the given ID was not found");
 
-    // Return the updated genre
     res.send(genre);
   })
 );
@@ -79,13 +65,10 @@ router.delete(
   "/:id",
   [auth, admin, validateObjectId],
   asyncMiddleware(async (req, res) => {
-    // Look up and delete the genre
-    // If the genre does not exist, return 404 - Not found
-    const genre = await Genre.findByIdAndDelete(req.params.id);
+    const genre = await genreService.remove(req.params.id);
     if (!genre)
       return res.status(404).send("The genre with the given ID was not found");
 
-    // Return the genre
     res.send(genre);
   })
 );
