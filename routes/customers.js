@@ -1,16 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { schema, Customer } = require("../models/customer");
+const { schema } = require("../models/customer");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const asyncMiddleware = require("../middleware/async");
 const validateObjectId = require("../middleware/validateObjectId");
+const customerService = require("../services/customer.service");
 
 // Get All
 router.get(
   "/",
   asyncMiddleware(async (req, res) => {
-    const customers = await Customer.find().sort({ name: 1 });
+    const customers = await customerService.getAll();
+
     res.send(customers);
   })
 );
@@ -20,7 +22,7 @@ router.get(
   "/:id",
   validateObjectId,
   asyncMiddleware(async (req, res) => {
-    const customer = await Customer.findById(req.params.id);
+    const customer = await customerService.getById(req.params.id);
     if (!customer)
       return res
         .status(404)
@@ -38,14 +40,9 @@ router.post(
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const customer = new Customer({
-      name: req.body.name,
-      isGold: req.body.isGold,
-      phone: req.body.phone,
-    });
-    const result = await customer.save();
+    const customer = await customerService.create(req.body);
 
-    res.send(result);
+    res.send(customer);
   })
 );
 
@@ -57,15 +54,7 @@ router.put(
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const customer = await Customer.findByIdAndUpdate(
-      req.params.id,
-      {
-        name: req.body.name,
-        isGold: req.body.isGold,
-        phone: req.body.phone,
-      },
-      { new: true }
-    );
+    const customer = await customerService.update(req.params.id, req.body);
 
     if (!customer)
       return res
@@ -81,7 +70,8 @@ router.delete(
   "/:id",
   [auth, admin, validateObjectId],
   asyncMiddleware(async (req, res) => {
-    const customer = await Customer.findByIdAndDelete(req.params.id);
+    const customer = await customerService.remove(req.params.id);
+
     if (!customer)
       return res
         .status(404)
