@@ -11,4 +11,4 @@ class UserRepo extends Repo {
   };
 }
 
-module.exports = new Repo(User);
+module.exports = new UserRepo(User);
