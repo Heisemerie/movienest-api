@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 async function create(data) {
   // Validate email (check user exists)
-  const user = await UserRepo.findByEmail({ email: data.email });
+  const user = await UserRepo.findByEmail(data.email);
   if (!user) return { user };
 
   // Validate password (compare passwords)
