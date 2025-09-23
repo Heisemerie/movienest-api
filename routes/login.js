@@ -17,7 +17,7 @@ router.post(
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const { user, validPassword, token } = loginService.create(req.body);
+    const { user, validPassword, token } = await loginService.create(req.body);
 
     if (!user) return res.status(400).send("Invalid email or password");
 
