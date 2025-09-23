@@ -9,7 +9,7 @@ async function getById(id) {
 }
 
 async function create(data) {
-  const customer = await CustomerRepo({
+  const customer = await CustomerRepo.create({
     name: data.name,
     isGold: data.isGold,
     phone: data.phone,
@@ -19,7 +19,7 @@ async function create(data) {
 }
 
 async function update(id, data) {
-  const customer = await CustomerRepo(id, {
+  const customer = await CustomerRepo.update(id, {
     name: data.name,
     isGold: data.isGold,
     phone: data.phone,
