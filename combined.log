@@ -1130,3 +1130,259 @@
 {"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
 {"level":"info","message":"Listening on port 3000..."}
 {"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"date":"Sun Sep 28 2025 11:34:26 GMT+0100 (West Africa Standard Time)","error":{"errorLabelSet":{}},"level":"error","message":"unhandledRejection: option transactionasynclocalstorage is not supported\nMongoParseError: option transactionasynclocalstorage is not supported\n    at parseOptions (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\connection_string.js:273:15)\n    at new MongoClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\mongo_client.js:66:61)\n    at NativeConnection.createClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js:343:14)\n    at NativeConnection.openUri (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\connection.js:1071:34)\n    at Mongoose.connect (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\mongoose.js:450:15)\n    at module.exports (C:\\Users\\ejike\\Workspace\\vidly-api\\startup\\db.js:7:6)\n    at Object.<anonymous> (C:\\Users\\ejike\\Workspace\\vidly-api\\index.js:12:24)\n    at Module._compile (node:internal/modules/cjs/loader:1688:14)\n    at Object..js (node:internal/modules/cjs/loader:1820:10)\n    at Module.load (node:internal/modules/cjs/loader:1423:32)","os":{"loadavg":[0,0,0],"uptime":62354.218},"process":{"argv":["C:\\Program Files\\nodejs\\node.exe","C:\\Users\\ejike\\Workspace\\vidly-api\\index.js"],"cwd":"C:\\Users\\ejike\\Workspace\\vidly-api","execPath":"C:\\Program Files\\nodejs\\node.exe","gid":null,"memoryUsage":{"arrayBuffers":18264919,"external":20725254,"heapTotal":59715584,"heapUsed":27612632,"rss":83595264},"pid":29636,"uid":null,"version":"v22.18.0"},"rejection":true,"stack":"MongoParseError: option transactionasynclocalstorage is not supported\n    at parseOptions (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\connection_string.js:273:15)\n    at new MongoClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\mongo_client.js:66:61)\n    at NativeConnection.createClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js:343:14)\n    at NativeConnection.openUri (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\connection.js:1071:34)\n    at Mongoose.connect (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\mongoose.js:450:15)\n    at module.exports (C:\\Users\\ejike\\Workspace\\vidly-api\\startup\\db.js:7:6)\n    at Object.<anonymous> (C:\\Users\\ejike\\Workspace\\vidly-api\\index.js:12:24)\n    at Module._compile (node:internal/modules/cjs/loader:1688:14)\n    at Object..js (node:internal/modules/cjs/loader:1820:10)\n    at Module.load (node:internal/modules/cjs/loader:1423:32)","trace":[{"column":15,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\connection_string.js","function":"parseOptions","line":273,"method":null,"native":false},{"column":61,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\mongo_client.js","function":"new MongoClient","line":66,"method":null,"native":false},{"column":14,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js","function":"NativeConnection.createClient","line":343,"method":"createClient","native":false},{"column":34,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\connection.js","function":"NativeConnection.openUri","line":1071,"method":"openUri","native":false},{"column":15,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\mongoose.js","function":"Mongoose.connect","line":450,"method":"connect","native":false},{"column":6,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\startup\\db.js","function":"module.exports","line":7,"method":"exports","native":false},{"column":24,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\index.js","function":null,"line":12,"method":null,"native":false},{"column":14,"file":"node:internal/modules/cjs/loader","function":"Module._compile","line":1688,"method":"_compile","native":false},{"column":10,"file":"node:internal/modules/cjs/loader","function":"Object..js","line":1820,"method":".js","native":false},{"column":32,"file":"node:internal/modules/cjs/loader","function":"Module.load","line":1423,"method":"load","native":false}]}
+{"level":"info","message":"Listening on port 3000..."}
+{"date":"Sun Sep 28 2025 11:45:03 GMT+0100 (West Africa Standard Time)","error":{"errorLabelSet":{}},"level":"error","message":"unhandledRejection: option transactionasynclocalstorage is not supported\nMongoParseError: option transactionasynclocalstorage is not supported\n    at parseOptions (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\connection_string.js:273:15)\n    at new MongoClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\mongo_client.js:66:61)\n    at NativeConnection.createClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js:343:14)\n    at NativeConnection.openUri (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\connection.js:1071:34)\n    at Mongoose.connect (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\mongoose.js:450:15)\n    at module.exports (C:\\Users\\ejike\\Workspace\\vidly-api\\startup\\db.js:9:6)\n    at Object.<anonymous> (C:\\Users\\ejike\\Workspace\\vidly-api\\index.js:12:24)\n    at Module._compile (node:internal/modules/cjs/loader:1688:14)\n    at Object..js (node:internal/modules/cjs/loader:1820:10)\n    at Module.load (node:internal/modules/cjs/loader:1423:32)","os":{"loadavg":[0,0,0],"uptime":62991.921},"process":{"argv":["C:\\Program Files\\nodejs\\node.exe","C:\\Users\\ejike\\Workspace\\vidly-api\\index.js"],"cwd":"C:\\Users\\ejike\\Workspace\\vidly-api","execPath":"C:\\Program Files\\nodejs\\node.exe","gid":null,"memoryUsage":{"arrayBuffers":18264919,"external":20725254,"heapTotal":58667008,"heapUsed":27930312,"rss":83550208},"pid":12108,"uid":null,"version":"v22.18.0"},"rejection":true,"stack":"MongoParseError: option transactionasynclocalstorage is not supported\n    at parseOptions (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\connection_string.js:273:15)\n    at new MongoClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\mongo_client.js:66:61)\n    at NativeConnection.createClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js:343:14)\n    at NativeConnection.openUri (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\connection.js:1071:34)\n    at Mongoose.connect (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\mongoose.js:450:15)\n    at module.exports (C:\\Users\\ejike\\Workspace\\vidly-api\\startup\\db.js:9:6)\n    at Object.<anonymous> (C:\\Users\\ejike\\Workspace\\vidly-api\\index.js:12:24)\n    at Module._compile (node:internal/modules/cjs/loader:1688:14)\n    at Object..js (node:internal/modules/cjs/loader:1820:10)\n    at Module.load (node:internal/modules/cjs/loader:1423:32)","trace":[{"column":15,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\connection_string.js","function":"parseOptions","line":273,"method":null,"native":false},{"column":61,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\mongo_client.js","function":"new MongoClient","line":66,"method":null,"native":false},{"column":14,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js","function":"NativeConnection.createClient","line":343,"method":"createClient","native":false},{"column":34,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\connection.js","function":"NativeConnection.openUri","line":1071,"method":"openUri","native":false},{"column":15,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\mongoose.js","function":"Mongoose.connect","line":450,"method":"connect","native":false},{"column":6,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\startup\\db.js","function":"module.exports","line":9,"method":"exports","native":false},{"column":24,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\index.js","function":null,"line":12,"method":null,"native":false},{"column":14,"file":"node:internal/modules/cjs/loader","function":"Module._compile","line":1688,"method":"_compile","native":false},{"column":10,"file":"node:internal/modules/cjs/loader","function":"Object..js","line":1820,"method":".js","native":false},{"column":32,"file":"node:internal/modules/cjs/loader","function":"Module.load","line":1423,"method":"load","native":false}]}
+{"level":"info","message":"Listening on port 3000..."}
+{"date":"Sun Sep 28 2025 11:45:05 GMT+0100 (West Africa Standard Time)","error":{"errorLabelSet":{}},"level":"error","message":"unhandledRejection: option transactionasynclocalstorage is not supported\nMongoParseError: option transactionasynclocalstorage is not supported\n    at parseOptions (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\connection_string.js:273:15)\n    at new MongoClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\mongo_client.js:66:61)\n    at NativeConnection.createClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js:343:14)\n    at NativeConnection.openUri (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\connection.js:1071:34)\n    at Mongoose.connect (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\mongoose.js:450:15)\n    at module.exports (C:\\Users\\ejike\\Workspace\\vidly-api\\startup\\db.js:10:6)\n    at Object.<anonymous> (C:\\Users\\ejike\\Workspace\\vidly-api\\index.js:12:24)\n    at Module._compile (node:internal/modules/cjs/loader:1688:14)\n    at Object..js (node:internal/modules/cjs/loader:1820:10)\n    at Module.load (node:internal/modules/cjs/loader:1423:32)","os":{"loadavg":[0,0,0],"uptime":62993.656},"process":{"argv":["C:\\Program Files\\nodejs\\node.exe","C:\\Users\\ejike\\Workspace\\vidly-api\\index.js"],"cwd":"C:\\Users\\ejike\\Workspace\\vidly-api","execPath":"C:\\Program Files\\nodejs\\node.exe","gid":null,"memoryUsage":{"arrayBuffers":18264919,"external":20725254,"heapTotal":58929152,"heapUsed":27686872,"rss":83763200},"pid":14204,"uid":null,"version":"v22.18.0"},"rejection":true,"stack":"MongoParseError: option transactionasynclocalstorage is not supported\n    at parseOptions (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\connection_string.js:273:15)\n    at new MongoClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\mongo_client.js:66:61)\n    at NativeConnection.createClient (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js:343:14)\n    at NativeConnection.openUri (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\connection.js:1071:34)\n    at Mongoose.connect (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\mongoose.js:450:15)\n    at module.exports (C:\\Users\\ejike\\Workspace\\vidly-api\\startup\\db.js:10:6)\n    at Object.<anonymous> (C:\\Users\\ejike\\Workspace\\vidly-api\\index.js:12:24)\n    at Module._compile (node:internal/modules/cjs/loader:1688:14)\n    at Object..js (node:internal/modules/cjs/loader:1820:10)\n    at Module.load (node:internal/modules/cjs/loader:1423:32)","trace":[{"column":15,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\connection_string.js","function":"parseOptions","line":273,"method":null,"native":false},{"column":61,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongodb\\lib\\mongo_client.js","function":"new MongoClient","line":66,"method":null,"native":false},{"column":14,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js","function":"NativeConnection.createClient","line":343,"method":"createClient","native":false},{"column":34,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\connection.js","function":"NativeConnection.openUri","line":1071,"method":"openUri","native":false},{"column":15,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\mongoose.js","function":"Mongoose.connect","line":450,"method":"connect","native":false},{"column":6,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\startup\\db.js","function":"module.exports","line":10,"method":"exports","native":false},{"column":24,"file":"C:\\Users\\ejike\\Workspace\\vidly-api\\index.js","function":null,"line":12,"method":null,"native":false},{"column":14,"file":"node:internal/modules/cjs/loader","function":"Module._compile","line":1688,"method":"_compile","native":false},{"column":10,"file":"node:internal/modules/cjs/loader","function":"Object..js","line":1820,"method":".js","native":false},{"column":32,"file":"node:internal/modules/cjs/loader","function":"Module.load","line":1423,"method":"load","native":false}]}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"_message":"Movie validation failed","errors":{"dailyRentalRate":{"kind":"max","message":"Path `dailyRentalRate` (500) is more than maximum allowed value (255).","name":"ValidatorError","path":"dailyRentalRate","properties":{"max":255,"message":"Path `dailyRentalRate` (500) is more than maximum allowed value (255).","path":"dailyRentalRate","type":"max","value":500},"value":500}},"level":"error","message":"Movie validation failed: dailyRentalRate: Path `dailyRentalRate` (500) is more than maximum allowed value (255). Movie validation failed: dailyRentalRate: Path `dailyRentalRate` (500) is more than maximum allowed value (255).","stack":"ValidationError: Movie validation failed: dailyRentalRate: Path `dailyRentalRate` (500) is more than maximum allowed value (255).\n    at Document.invalidate (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\document.js:3358:32)\n    at C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\document.js:3119:17\n    at C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\mongoose\\lib\\schemaType.js:1410:9\n    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)"}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"error","message":"RentalRepo.getById is not a function RentalRepo.getById is not a function","stack":"TypeError: RentalRepo.getById is not a function\n    at Object.getById (C:\\Users\\ejike\\Workspace\\vidly-api\\services\\rental.service.js:11:27)\n    at C:\\Users\\ejike\\Workspace\\vidly-api\\routes\\rentals.js:25:40\n    at C:\\Users\\ejike\\Workspace\\vidly-api\\middleware\\async.js:5:13\n    at Layer.handleRequest (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\router\\lib\\layer.js:152:17)\n    at next (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\router\\lib\\route.js:157:13)\n    at validateObjectId (C:\\Users\\ejike\\Workspace\\vidly-api\\middleware\\validateObjectId.js:7:3)\n    at Layer.handleRequest (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\router\\lib\\layer.js:152:17)\n    at next (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\router\\lib\\route.js:157:13)\n    at Route.dispatch (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\router\\lib\\route.js:117:3)\n    at handle (C:\\Users\\ejike\\Workspace\\vidly-api\\node_modules\\router\\index.js:435:11)"}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"info","message":"Connected to mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?replicaSet=rs0..."}

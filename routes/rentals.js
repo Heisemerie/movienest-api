@@ -1,19 +1,18 @@
 const express = require("express");
-const { schema, Rental } = require("../models/rental");
-const { Customer } = require("../models/customer");
-const { Movie } = require("../models/movie");
-const { default: mongoose } = require("mongoose");
+const { schema } = require("../models/rental");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const asyncMiddleware = require("../middleware/async");
 const validateObjectId = require("../middleware/validateObjectId");
+const rentalService = require("../services/rental.service");
 const router = express.Router();
 
 // Get all
 router.get(
   "/",
   asyncMiddleware(async (req, res) => {
-    const rentals = await Rental.find().sort("-dateOut");
+    const rentals = await rentalService.getAll();
+
     res.send(rentals);
   })
 );
@@ -23,7 +22,7 @@ router.get(
   "/:id",
   validateObjectId,
   asyncMiddleware(async (req, res) => {
-    const rental = await Rental.findById(req.params.id);
+    const rental = await rentalService.getById(req.params.id);
     if (!rental)
       return res.status(404).send("The rental with the given ID was not found");
 
@@ -34,129 +33,68 @@ router.get(
 // Post
 router.post(
   "/",
-  auth,
+  // auth,
   asyncMiddleware(async (req, res) => {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const session = await mongoose.startSession(); // Starts a session object (holds context for transaction).
+    const { rental, err } = await rentalService.create(req.body);
 
-    try {
-      await session.withTransaction(async () => {
-        const customer = await Customer.findById(req.body.customerId).session(
-          session
-        );
-        if (!customer) return res.status(400).send("Invalid customer");
+    if (
+      err &&
+      ["Invalid customer", "Invalid movie", "Movie not in stock"].includes(
+        err.message
+      )
+    )
+      return res.status(400).send(err.message);
 
-        const movie = await Movie.findById(req.body.movieId).session(session);
-        if (!movie) return res.status(400).send("Invalid movie");
+    if (err) return res.status(500).send(err.message || "Something Failed...");
 
-        if (movie.numberInStock === 0)
-          return res.status(400).send("Movie not in stock"); // check if the movie is in stock
-
-        // create Rental (in memory)
-        const rental = new Rental({
-          customer: {
-            _id: customer._id,
-            name: customer.name,
-            isGold: customer.isGold,
-            phone: customer.phone,
-          },
-          movie: {
-            _id: movie._id,
-            title: movie.title,
-            dailyRentalRate: movie.dailyRentalRate,
-          },
-        });
-        const result = await rental.save({ session });
-
-        movie.numberInStock--; // decrement movie stock
-        await movie.save({ session });
-
-        res.send(result).status(201);
-      });
-    } catch (err) {
-      res.status(500).send(err.message || "Something Failed...");
-    } finally {
-      await session.endSession();
-    }
+    res.status(201).send(rental);
   })
 );
 
 // Update
 router.put(
   "/:id",
-  [auth, validateObjectId],
+  // [auth, validateObjectId],
   asyncMiddleware(async (req, res) => {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const session = await mongoose.startSession();
+    const { rental, err } = await rentalService.update(req.params.id, req.body);
 
-    try {
-      await session.withTransaction(async () => {
-        // fetch new customer
-        const newCustomer = await Customer.findById(
-          req.body.customerId
-        ).session(session);
-        if (!newCustomer) return res.status(400).send("Invalid customer");
+    if (
+      err &&
+      [
+        "Invalid customer",
+        "Invalid movie",
+        "Movie not in stock",
+        "The rental with the given ID was not found",
+      ].includes(err.message)
+    )
+      return res.status(400).send(err.message);
 
-        // fetch new movie
-        const newMovie = await Movie.findById(req.body.movieId).session(
-          session
-        );
-        if (!newMovie) return res.status(400).send("Invalid movie");
+    if (err) return res.status(500).send(err.message || "Something Failed...");
 
-        if (newMovie.numberInStock === 0)
-          return res.status(400).send("Movie not in stock"); // check if the new movie is in stock
-
-        // fetch Rental
-        const rental = await Rental.findById(req.params.id).session(session);
-
-        // fetch previous movie using rental
-        const prevMovie = await Movie.findById(rental.movie._id).session(
-          session
-        );
-        if (prevMovie._id !== newMovie._id) prevMovie.numberInStock++; // increment previous movie if different from new movie
-        await prevMovie.save({ session });
-
-        // update the rental with newMovie and newCustomer (in memory)
-        rental.set({
-          customer: {
-            _id: newCustomer._id,
-            name: newCustomer.name,
-            isGold: newCustomer.isGold,
-            phone: newCustomer.phone,
-          },
-          movie: {
-            _id: newMovie._id,
-            title: newMovie.title,
-            dailyRentalRate: newMovie.dailyRentalRate,
-          },
-        });
-        const result = await rental.save({ session }); // save updated rental
-
-        newMovie.numberInStock--; // decrement new movie stock
-        await newMovie.save({ session });
-
-        res.send(result).status(201);
-      });
-    } catch (err) {
-      res.status(500).send(err.message || "Something Failed...");
-    } finally {
-      await session.endSession();
-    }
+    res.send(rental);
   })
 );
 
 // Delete
 router.delete(
   "/:id",
-  [auth, admin, validateObjectId],
+  // [auth, admin, validateObjectId],
   asyncMiddleware(async (req, res) => {
-    const rental = await Rental.findByIdAndDelete(req.params.id);
-    if (!rental)
-      return res.status(404).send("The rental with the given ID was not found");
+    const { rental, err } = await rentalService.remove(req.params.id);
+
+    if (
+      err &&
+      ["The rental with the given ID was not found"].includes(err.message)
+    )
+      return res.status(404).send(err.message);
+
+    if (err) return res.status(500).send(err.message || "Something Failed...");
 
     res.send(rental);
   })
