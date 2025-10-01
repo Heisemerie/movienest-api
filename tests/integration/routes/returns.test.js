@@ -1,5 +1,6 @@
 const request = require("supertest");
 const { Rental } = require("../../../models/rental");
+const { User } = require("../../../models/user");
 const mongoose = require("mongoose");
 
 // POST /api/returns {customerId, movieId}
@@ -19,6 +20,7 @@ let server;
 
 describe("/api/returns", () => {
   let customerId;
+  let token;
   let movieId;
   let rental;
 
@@ -44,13 +46,24 @@ describe("/api/returns", () => {
     await Rental.deleteMany({});
   });
 
-  const exec = () => {
-    return request(server).post(`/api/returns`).send({ customerId, movieId });
-  };
+  const exec = () => {};
 
   it("should return 401 if client is not logged in", async () => {
-    const res = await exec();
+    const res = await request(server)
+      .post(`/api/returns`)
+      .send({ customerId, movieId });
 
     expect(res.status).toBe(401);
+  });
+
+  it("should return 400 if customerId is not provided", async () => {
+    token = new User().generateAuthToken();
+
+    const res = await request(server)
+      .post(`/api/returns`)
+      .set("x-auth-token", token)
+      .send({ movieId });
+
+    expect(res.status).toBe(400);
   });
 });
