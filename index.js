@@ -8,7 +8,6 @@ const app = express();
 
 // Load configs
 const uri = process.env.MONGODB_URI || config.get("db.URI");
-const port = config.get("port");
 const jwtPrivateKey = process.env.JWT_SECRET || config.get("jwtPrivateKey");
 
 // Startup modules
@@ -20,6 +19,8 @@ require("./startup/prod")(app);
 
 // Only start server in development
 if (!process.env.VERCEL) {
+  const port = config.get("port");
+
   const server = app.listen(port, () => {
     winston.info(`Listening on port ${port}...`);
   });
