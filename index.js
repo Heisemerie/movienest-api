@@ -7,9 +7,9 @@ const serverless = require("serverless-http");
 const app = express();
 
 // Load configs
-const uri = config.get("db.URI");
+const uri = process.env.MONGODB_URI || config.get("db.URI");
 const port = config.get("port");
-const jwtPrivateKey = config.get("jwtPrivateKey");
+const jwtPrivateKey = process.env.JWT_SECRET || config.get("jwtPrivateKey");
 
 // Startup modules
 require("./startup/logging")(uri);
