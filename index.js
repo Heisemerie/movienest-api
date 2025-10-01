@@ -12,6 +12,7 @@ require("./startup/logging")(uri);
 require("./startup/db")(uri);
 require("./startup/routes")(app);
 require("./startup/configs")(jwtPrivateKey);
+require("./startup/prod")(app);
 
 // Express "endpoint" event emitter
 const server = app.listen(port, () => {
