@@ -57,7 +57,7 @@ router.post(
 // Update
 router.put(
   "/:id",
-  // [auth, validateObjectId],
+  [auth, validateObjectId],
   asyncMiddleware(async (req, res) => {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -84,7 +84,7 @@ router.put(
 // Delete
 router.delete(
   "/:id",
-  // [auth, admin, validateObjectId],
+  [auth, admin, validateObjectId],
   asyncMiddleware(async (req, res) => {
     const { rental, err } = await rentalService.remove(req.params.id);
 
