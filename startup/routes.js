@@ -4,6 +4,7 @@ const movies = require("../routes/movies");
 const rentals = require("../routes/rentals");
 const users = require("../routes/users");
 const login = require("../routes/login");
+const returns = require("../routes/returns");
 const error = require("../middleware/error");
 const express = require("express");
 
@@ -18,5 +19,6 @@ module.exports = function (app) {
   app.use("/api/rentals", rentals);
   app.use("/api/users", users);
   app.use("/api/login", login);
+  app.use("/api/returns", returns);
   app.use(error); // register after all middleware functions (called by async.js, handles express and mongodb request processing errors)
 };
