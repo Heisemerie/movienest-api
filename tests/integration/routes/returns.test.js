@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 // Return 400 if rental already processed
 // Return 200 if valid request
 // Set return date
-// Calculate rental fee
+// Calculate rental fee (numberOfDays * movie.dailyRentalRate)
 // Increase the stock
 // Return the rental
 
@@ -99,5 +99,14 @@ describe("/api/returns", () => {
     const res = await exec();
 
     expect(res.status).toBe(200);
+  });
+
+  it("should set returnDate if input is valid", async () => {
+    const res = await exec();
+
+    const rentalInDb = await Rental.findById(rental._id);
+    const diff = new Date() - rentalInDb.dateReturned;
+
+    expect(diff).toBeLessThan(10 * 1000);
   });
 });
