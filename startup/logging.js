@@ -10,7 +10,9 @@ module.exports = function (uri) {
   winston.add(
     new winston.transports.File({ filename: "error.log", level: "error" })
   );
-  winston.add(new winston.transports.MongoDB({ db: uri, level: "error" }));
+  if (!process.env.VERCEL) {
+    winston.add(new winston.transports.MongoDB({ db: uri, level: "error" }));
+  }
 
   // Add uncaught exception and rejection handlers to default logger
   winston.exceptions.handle(

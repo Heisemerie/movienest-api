@@ -12,6 +12,11 @@ module.exports = function (app) {
   // Middleware
   app.use(express.json());
 
+  // Health check
+  app.get("/", (req, res) => {
+    res.send({ status: "MovieNest API running 🚀" });
+  });
+
   // Routes
   app.use("/api/genres", genres);
   app.use("/api/customers", customers);
