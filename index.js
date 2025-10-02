@@ -7,7 +7,7 @@ const app = express();
 
 // Load configs
 const uri = process.env.MONGODB_URI || config.get("db.URI");
-const port = config.get("port");
+const port = config.get("port") || 3000;
 const jwtPrivateKey = process.env.JWT_SECRET || config.get("jwtPrivateKey");
 
 // Startup modules
