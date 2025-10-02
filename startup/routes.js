@@ -5,6 +5,7 @@ const rentals = require("../routes/rentals");
 const users = require("../routes/users");
 const login = require("../routes/login");
 const returns = require("../routes/returns");
+const status = require("../routes/status");
 const error = require("../middleware/error");
 const express = require("express");
 
@@ -12,12 +13,8 @@ module.exports = function (app) {
   // Middleware
   app.use(express.json());
 
-  // Health check
-  app.get("/", (req, res) => {
-    res.send({ status: "MovieNest API running 🚀" });
-  });
-
   // Routes
+  app.use("/", status);
   app.use("/api/genres", genres);
   app.use("/api/customers", customers);
   app.use("/api/movies", movies);
