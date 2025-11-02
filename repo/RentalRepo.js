@@ -9,6 +9,10 @@ class RentalRepo extends Repo {
   findAllSortedByDate() {
     return this.findAll({}, { dateOut: -1 });
   }
+
+  findByParams = function (params) {
+    return this.model.findOne(params); // returns
+  };
 }
 
 module.exports = new RentalRepo(Rental);
