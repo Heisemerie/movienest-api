@@ -1,4 +1,3 @@
-const moment = require("moment");
 const RentalRepo = require("../repo/RentalRepo");
 const mongoose = require("mongoose");
 const MovieRepo = require("../repo/MovieRepo");
@@ -19,9 +18,7 @@ async function create(data) {
       if (rental.dateReturned) throw new Error("Return already processed");
 
       // set the return date and fee
-      rental.dateReturned = new Date();
-      const rentalDays = moment().diff(rental.dateOut, "days");
-      rental.rentalFee = rentalDays * rental.movie.dailyRentalRate;
+      rental.return();
       await rental.save();
 
       // increment movie stock

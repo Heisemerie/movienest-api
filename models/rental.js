@@ -2,6 +2,7 @@ const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 const mongoose = require("mongoose");
 const { customerSchema } = require("./customer");
+const moment = require("moment");
 
 // Joi rental schema
 const schema = Joi.object({
@@ -37,6 +38,12 @@ const rentalSchema = new mongoose.Schema({
   dateReturned: { type: Date },
   rentalFee: { type: Number, min: 0 },
 });
+
+rentalSchema.methods.return = function () {
+  this.dateReturned = new Date();
+  const rentalDays = moment().diff(this.dateOut, "days");
+  this.rentalFee = rentalDays * this.movie.dailyRentalRate;
+};
 
 // Mongoose rental model
 const Rental = mongoose.model("Rental", rentalSchema);
