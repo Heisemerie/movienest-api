@@ -3,7 +3,7 @@ const customers = require("../routes/customers");
 const movies = require("../routes/movies");
 const rentals = require("../routes/rentals");
 const users = require("../routes/users");
-const login = require("../routes/login");
+const auth = require("../routes/auth");
 const returns = require("../routes/returns");
 const status = require("../routes/status");
 const error = require("../middleware/error");
@@ -20,7 +20,7 @@ module.exports = function (app) {
   app.use("/api/movies", movies);
   app.use("/api/rentals", rentals);
   app.use("/api/users", users);
-  app.use("/api/login", login);
+  app.use("/api/auth", auth);
   app.use("/api/returns", returns);
   app.use(error); // register after all middleware functions (called by async.js, handles express and mongodb request processing errors)
 };
