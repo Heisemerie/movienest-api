@@ -22,6 +22,7 @@ if (!process.env.VERCEL) {
 
   const server = app.listen(port, () => {
     winston.info(`Listening on port ${port}...`);
+    winston.info(`Swagger Docs available at http://localhost:3000/api-docs`);
   });
 
   module.exports = server; // for integration tests, local dev

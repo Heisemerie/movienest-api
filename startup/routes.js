@@ -7,6 +7,7 @@ const auth = require("../routes/auth");
 const returns = require("../routes/returns");
 const status = require("../routes/status");
 const error = require("../middleware/error");
+const { swaggerUi, swaggerSpec } = require("./swagger");
 const express = require("express");
 
 module.exports = function (app) {
@@ -15,6 +16,7 @@ module.exports = function (app) {
 
   // Routes
   app.use("/", status);
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use("/api/genres", genres);
   app.use("/api/customers", customers);
   app.use("/api/movies", movies);
