@@ -1,6 +1,6 @@
 const config = require("config");
 
-const uri = process.env.MONGODB_URI || config.get("db.URI");
+const uri = process.env.MONGODB_URI || 3000 || config.get("db.URI");
 const jwtPrivateKey = process.env.JWT_SECRET || config.get("jwtPrivateKey");
 const port = process.env.PORT || config.get("port");
 
