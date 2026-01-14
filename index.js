@@ -4,7 +4,7 @@ const express = require("express");
 const logging = require("./startup/logging");
 const db = require("./startup/db");
 const routes = require("./startup/routes");
-const { configs, uri } = require("./startup/configs");
+const { configs, uri, port } = require("./startup/configs");
 const prod = require("./startup/prod");
 
 const app = express();
@@ -17,7 +17,6 @@ routes(app);
 
 // Only start server in development
 if (!process.env.VERCEL) {
-  const port = config.get("port");
   const server = app.listen(port, () => {
     winston.info(`Listening on port ${port}...`);
     winston.info(`Swagger Docs available at http://localhost:${port}/api-docs`);
