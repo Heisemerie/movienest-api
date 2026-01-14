@@ -1,7 +1,11 @@
 const config = require("config");
 
-const uri = process.env.MONGODB_URI || config.get("db.URI");
-const jwtPrivateKey = process.env.JWT_SECRET || config.get("jwtPrivateKey");
+const uri = !process.env.VERCEL
+  ? config.get("db.URI")
+  : process.env.MONGODB_URI;
+const jwtPrivateKey = !process.env.VERCEL
+  ? config.get("jwtPrivateKey")
+  : process.env.JWT_SECRET;
 const port = !process.env.VERCEL ? config.get("port") : 3000;
 
 module.exports.configs = function configs() {
