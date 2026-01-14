@@ -4,7 +4,7 @@ const express = require("express");
 const logging = require("./startup/logging");
 const db = require("./startup/db");
 const routes = require("./startup/routes");
-const { configs, port } = require("./startup/configs");
+const { configs, port, uri } = require("./startup/configs");
 const prod = require("./startup/prod");
 
 const app = express();
