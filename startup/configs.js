@@ -2,7 +2,7 @@ const config = require("config");
 
 const uri = process.env.MONGODB_URI || config.get("db.URI");
 const jwtPrivateKey = process.env.JWT_SECRET || config.get("jwtPrivateKey");
-const port = config.get("port") || 3000;
+const port = !process.env.VERCEL ? config.get("port") : 3000;
 
 module.exports.configs = function configs() {
   if (!jwtPrivateKey) {
