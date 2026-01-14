@@ -1,7 +1,7 @@
-const config = require("config");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const mongoose = require("mongoose");
+const { jwtPrivateKey } = require("../startup/configs");
 
 // Joi user schema
 const schema = Joi.object({
@@ -35,10 +35,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.method("generateAuthToken", function () {
-  return jwt.sign(
-    { _id: this._id, isAdmin: this.isAdmin },
-    config.get("jwtPrivateKey")
-  );
+  return jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, jwtPrivateKey);
 }); // Information Expert Principle (add token generation to user document)
 
 // Mongoose User model
