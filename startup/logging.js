@@ -1,5 +1,6 @@
 const winston = require("winston");
 require("winston-mongodb");
+const { notVercel } = require("./configs");
 
 module.exports = function (uri) {
   // Add a file, console and db transport to the default logger
@@ -10,7 +11,7 @@ module.exports = function (uri) {
   winston.add(
     new winston.transports.File({ filename: "error.log", level: "error" })
   );
-  if (!process.env.VERCEL) {
+  if (notVercel) {
     winston.add(new winston.transports.MongoDB({ db: uri, level: "error" }));
   }
 

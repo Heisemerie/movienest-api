@@ -1,12 +1,11 @@
 const config = require("config");
 
-const uri = !process.env.VERCEL
-  ? config.get("db.URI")
-  : process.env.MONGODB_URI;
-const jwtPrivateKey = !process.env.VERCEL
+const notVercel = !process.env.VERCEL;
+const uri = notVercel ? config.get("db.URI") : process.env.MONGODB_URI;
+const port = notVercel ? config.get("port") : 3000;
+const jwtPrivateKey = notVercel
   ? config.get("jwtPrivateKey")
   : process.env.JWT_SECRET;
-const port = !process.env.VERCEL ? config.get("port") : 3000;
 
 module.exports.configs = function configs() {
   if (!jwtPrivateKey) {
@@ -23,3 +22,4 @@ module.exports.configs = function configs() {
 module.exports.uri = uri;
 module.exports.jwtPrivateKey = jwtPrivateKey;
 module.exports.port = port;
+module.exports.notVercel = notVercel;
