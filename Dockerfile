@@ -1,4 +1,3 @@
-FROM node:alpine
-COPY . /app
+FROM node:22.22.0-alpine3.23
 WORKDIR /app
-CMD node index.js
+COPY . .
