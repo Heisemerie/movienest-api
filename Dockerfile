@@ -1,4 +1,6 @@
 FROM node:22.22.0-alpine3.23
+RUN addgroup app && adduser -S -G app app
+USER app
 WORKDIR /app
 COPY . .
 RUN npm install
@@ -6,5 +8,3 @@ ENV DB_URI="mongodb://localhost:27017,localhost:27018,localhost:27019/vidly?repl
 ENV JWT_SECRET="mySecretKey"
 ENV PORT=3000
 EXPOSE 3000
-RUN addgroup app && adduser -S -G app app
-USER app
