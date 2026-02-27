@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --verbose --coverage",
-    "start": "node index.js"
+    "start": "node index.js",
+    "cluster": "node cluster.js"
   },
   "keywords": [],
   "author": "",
