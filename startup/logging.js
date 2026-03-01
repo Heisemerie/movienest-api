@@ -7,12 +7,12 @@ module.exports = function (uri) {
   winston.add(new winston.transports.Console());
   winston.add(
     new winston.transports.File({
-      filename: "logs/combined.log",
+      filename: "tmp/combined.log",
       level: "info",
     }),
   );
   winston.add(
-    new winston.transports.File({ filename: "logs/error.log", level: "error" }),
+    new winston.transports.File({ filename: "tmp/error.log", level: "error" }),
   );
   if (notVercel) {
     winston.add(new winston.transports.MongoDB({ db: uri, level: "error" }));
@@ -20,11 +20,11 @@ module.exports = function (uri) {
 
   // Add uncaught exception and rejection handlers to default logger
   winston.exceptions.handle(
-    new winston.transports.File({ filename: "logs/uncaughtExceptions.log" }),
+    new winston.transports.File({ filename: "tmp/uncaughtExceptions.log" }),
     new winston.transports.Console(),
   );
   winston.rejections.handle(
-    new winston.transports.File({ filename: "logs/unhandledRejections.log" }),
+    new winston.transports.File({ filename: "tmp/unhandledRejections.log" }),
     new winston.transports.Console(),
   );
 };
